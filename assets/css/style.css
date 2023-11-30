@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+*{
+  font-family: 'Inter', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  background-color: #FFF;
+}
+
+/* Input's w/ Passwords */
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  cursor: pointer;
+}
+
+/* Home */
+.home-cont{
+  height: 200px;
+  border-bottom-right-radius: 15%;
+  border-bottom-left-radius: 15%;
+ }
+
+ /* Home */
+.other-cont{
+  height: 120px;
+  border-bottom-right-radius: 15%;
+  border-bottom-left-radius: 15%;
+ }
+
+/* Victim & Witnesss */
+.fa-search {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  cursor: pointer;
+}
