@@ -23,7 +23,7 @@
 
 <body>
 
-  <div class="bg-primary text-center other-cont">
+  <div class="text-center other-cont">
     <div class="d-flex justify-content-around pt-3">
       <a href="./home.php"><img src="../assets/img/orig-logo.png" class="img-fluid" width="50px"></a>
       <h2>SCERNS</h2>
@@ -45,7 +45,7 @@
         <a href="./medic.php" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
-              <i class="fa-solid fa-truck-medical fa-2xl" style="color: #FFF;"></i>
+              <i class="fa-solid fa-truck-medical fa-2xl text-light"></i>
               <h2 class="card-title text-light my-2">MEDICS</h2>
             </div>
           </div>
@@ -55,7 +55,7 @@
         <a href="./police.php" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
-              <i class="fa-solid fa-building-shield fa-2xl" style="color: #FFF;"></i>
+              <i class="fa-solid fa-building-shield fa-2xl text-light"></i>
               <h2 class="card-title text-light my-2">POLICE</h2>
             </div>
           </div>
@@ -65,7 +65,7 @@
         <a href="./fire.php" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
-              <i class="fa-solid fa-fire fa-2xl" style="color: #FFF;"></i>
+              <i class="fa-solid fa-fire fa-2xl text-light"></i>
               <h2 class="card-title text-light my-2">FIRE</h2>
             </div>
           </div>
@@ -75,7 +75,7 @@
         <a href="./disaster.php" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
-              <i class="fa-solid fa-cloud-showers-heavy fa-2xl" style="color: #FFF;"></i>
+              <i class="fa-solid fa-hurricane fa-2xl text-light"></i>
               <h2 class="card-title text-light my-2">NATURAL DISASTER</h2>
             </div>
           </div>

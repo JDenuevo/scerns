@@ -23,7 +23,7 @@
 
 <body>
 
-  <div class="bg-primary text-center other-cont">
+  <div class="text-center other-cont">
     <div class="d-flex justify-content-around pt-3">
       <a href="./home.php"><img src="../assets/img/orig-logo.png" class="img-fluid" width="50px"></a>
       <h2>SCERNS</h2>

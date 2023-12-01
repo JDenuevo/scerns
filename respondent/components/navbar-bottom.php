@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg fixed-bottom sidebar-nav" id="mobile-navbar">
   <ul id="sidebarnav" class="nav nav-pills w-100 mx-2">
     <li class="nav-item sidebar-item text-center my-auto">
-      <a class="nav-link sidebar-link text-decoration-none text-secondary" href="./notification.php" aria-expanded="false">
-        <i class="fa-solid fa-bell fa-xl"></i>
+      <a class="nav-link sidebar-link text-decoration-none text-secondary" data-bs-toggle="modal" data-bs-target="#notif-modal">
+        <i class="fa-solid fa-bullhorn fa-xl"></i>
       </a>
     </li>
     <li class="nav-item sidebar-item text-center my-auto">
@@ -16,6 +16,7 @@
       </a>
     </li>
   </ul>
+
 </nav>
 
 <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="off-nav1" aria-labelledby="staticBackdropLabel"> 
@@ -99,8 +100,7 @@
   </div>
 </div>
 
-
-<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="off-nav2" aria-labelledby="staticBackdropLabel"> 
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="off-nav2" aria-labelledby="staticBackdropLabel">  
   <div class="offcanvas-body bg-primary">
     <div class="d-flex justify-content-between">
       <a href="#off-nav1" data-bs-toggle="offcanvas"><i class="fa-solid fa-chevron-left fa-xl" style="color: #FFF;"></i></a>
@@ -184,16 +184,5 @@ li {
 
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.addEventListener('click', function (event) {
-        var offcanvasLink = document.querySelector('.nav-link[data-bs-toggle="offcanvas"]');
-        var offcanvas = new bootstrap.Offcanvas(offcanvasLink.getAttribute('href'));
 
-        if (!offcanvasLink.contains(event.target)) {
-            // Click is outside the offcanvas link
-            offcanvas.hide();
-        }
-    });
-});
-</script>
+

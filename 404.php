@@ -30,7 +30,7 @@
         <img src="../assets/img/404.png" class="img-fluid" style="width: 450px; height: 230px;">
         <h1>404 UNAUTHORIZED</h1>
         <h6>The server cannot find the requested resource.</h6>
-        <a href="./home.php" class="btn btn-primary rounded-pill mt-5 w-50 fw-semibold">Back to Home</a>
+        <a href="./user/home.php" class="btn btn-primary rounded-pill mt-5 w-50 fw-semibold">Back to Home</a>
     </div>
 </div>
 

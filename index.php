@@ -34,12 +34,12 @@
             <h1>SCERNS</h1>
 
             <div class="form-floating mb-3 text-start">
-              <input type="text" class="form-control rounded-pill" name="username" id="username" placeholder="Username" value="<?php if(isset($_COOKIE['fnbkn'])) echo $_SESSION['fnbkn']; ?>" required>
+              <input type="text" class="form-control rounded-4" name="username" id="username" placeholder="Username" value="<?php if(isset($_COOKIE['fnbkn'])) echo $_SESSION['fnbkn']; ?>" required>
               <label for="username" class="form-label">Username</label>
             </div>
 
             <div class="form-floating mb-3 text-start" style="position: relative;">
-              <input type="password" class="form-control rounded-pill" id="floatingPassword" name="password" placeholder="Password" value="<?php if(isset($_COOKIE['qbtuyqug'])) echo $_SESSION['qbtuyqug']; ?>" required>
+              <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" value="<?php if(isset($_COOKIE['qbtuyqug'])) echo $_SESSION['qbtuyqug']; ?>" required>
               <label for="floatingPassword">Password</label>
               <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
             </div>
@@ -48,22 +48,14 @@
               <label>
                 <input type="checkbox" name="remember" id="remember" checked> Remember me
               </label>
-              <a href="pages/forgotpass.php" class="text-decoration-none text-secondary">Forgot password?</a>
+              <a href="./forgotpass.php" class="text-decoration-none text-secondary">Forgot password?</a>
             </div>
 
             <button type="submit" class="btn btn-primary btn-lg m-3 rounded-pill fw-bold w-50 mt-2">Log In</button>
 
-            <!-- <h5 class="text-center">or</h5>
-
-            <div class="d-flex justify-content-center">
-              <button type="button" onclick="signIn()" class="btn btn-light btn-lg rounded-pill fw-bold" style="box-shadow: -4px 4px #BEB5B5;">
-                <img src="./assets/img/google.png" alt="Google Logo" style="width: 30px; height: 30px; margin-right: 5px; "> Continue with Google
-              </button>
-            </div> -->
-
             <div class="d-flex justify-content-around mt-3">
               <a class="text-decoration-none text-dark">Don't have Account?</a>
-              <a class="text-decoration-none text-primary" href="register.php">Create Account</a>
+              <a class="text-decoration-none text-primary" href="./register.php">Create Account</a>
             </div>
 
           </div>

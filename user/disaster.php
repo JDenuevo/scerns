@@ -23,7 +23,7 @@
 
 <body>
 
-  <div class="bg-primary text-center home-cont">
+  <div class="text-center home-cont">
     <div class="d-flex justify-content-around pt-3">
       <a href="./home.php"><img src="../assets/img/orig-logo.png" class="img-fluid" width="50px"></a>
       <h2>SCERNS</h2>
@@ -31,7 +31,7 @@
         <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
       </a>
     </div>
-    <i class="fa-solid fa-cloud-showers-heavy fa-2xl"></i>
+    <i class="fa-solid fa-hurricane fa-2xl"></i>
     <h2>NATURAL DISASTER</h2>
   </div>
 

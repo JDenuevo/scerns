@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SCERNS | Register</title>
+  <title>SCERNS | Forgot Password</title>
 
   <link rel="icon" href="assets/img/orig-logo.png">
   <script src ="scripts/google-api.js"></script>
@@ -31,33 +31,19 @@
         <div class="col-12 col-md-8 col-lg-6 col-xl-5 shadow rounded-4 px-5 pt-5 bg-light">
           <div class="text-center" style="border-radius: 1rem;">
 
-            <h1>Create your Account</h1>
+            <h1>Forgot Password</h1>
+
             <br>
 
             <div class="form-floating mb-2" id="emailForm">
                 <input type="email" id="" class="form-control rounded-4" id="floatingInput" placeholder="Email" name="email" autocomplete="" required>
                 <label for="emailInput" class="form-label">Email</label>
             </div>
-
-            <div class="form-floating mb-2">
-                <input type="text" id="" class="form-control rounded-4" id="floatingInput" placeholder="Username" name="username" autocomplete="off" maxlength="20">
-                <label for="validationServer01" class="form-label">Username</label>
-            </div>
-
-            <div class="form-floating mb-2">
-                <input type="password" id="" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" minlenth="10" maxlength="15" required>
-                <label for="floatingPassword">Password</label>
-            </div>
-
-            <div class="form-floating mb-2">
-                <input type="password" id="" class="form-control rounded-4" name="confirm_password" id="floatingPassword" placeholder="ConfirmPassword" minlenth="10" maxlength="15" required>
-                <label for="floatingconpassword" class="form-label">Confirm Password</label>
-            </div>
             
-            <button type="submit" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Register Account</button>
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Submit</button>
 
             <div class="d-flex justify-content-around mt-3">
-              <a class="text-decoration-none text-dark">Already have an account?</a>
+              <a class="text-decoration-none text-dark">You remembered your account?</a>
               <a class="text-decoration-none text-primary" href="./index.php">Login</a>
             </div>
             <br><br>

@@ -23,7 +23,7 @@
 
 <body>
 
-  <div class="bg-primary home-cont">
+  <div class="text-center home-cont">
     <div class="d-flex justify-content-around pt-3">
       <a href="./home.php"><img src="../assets/img/orig-logo.png" class="img-fluid" width="50px"></a>
       <h2 class="fw-semibold text-secondary">SCERNS</h2>
@@ -39,7 +39,7 @@
 
   <br><br>
     
-  <div class="container d-flex align-items-center justify-content-center text-center py-5">
+  <div class="container d-flex align-items-center justify-content-center text-center py-3">
     <div class="rounded-circle border border-5 position-relative" style="width: 300px; height: 300px;">
       <button data-bs-toggle="modal" data-bs-target="#select-modal" class="btn btn-primary d-flex align-items-center rounded-circle border border-5 justify-content-center text-decoration-none" style="width: 100%; height: 100%;">
         <h1 class="text-white">Emergency<br>Button</h1>

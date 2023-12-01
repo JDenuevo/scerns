@@ -26,6 +26,7 @@ body{
 /* Home */
 .home-cont{
   height: 200px;
+  background-color: #8DA48F;
   border-bottom-right-radius: 15%;
   border-bottom-left-radius: 15%;
  }
@@ -33,6 +34,7 @@ body{
  /* Home */
 .other-cont{
   height: 120px;
+  background-color: #8DA48F;
   border-bottom-right-radius: 15%;
   border-bottom-left-radius: 15%;
  }
