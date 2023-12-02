@@ -44,31 +44,32 @@
     </div>
     
     <div class="container text-center">
-      <h3></h3>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="addressInput" placeholder="">
-        <label for="addressInput">Address</label>
-        <ul id="suggestions"></ul>
-      </div>
-      
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="">
-        <label for="floatingInput">Nearest Landmark</label>
-      </div>
+      <form action="report-qry.php" method="post">
+        <h3></h3>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="addressInput" name="address" placeholder="">
+          <label for="addressInput">Address</label>
+          <ul id="suggestions"></ul>
+        </div>
+        
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="landmark" placeholder="">
+          <label for="floatingInput">Nearest Landmark</label>
+        </div>
 
-      <h3></h3>
-      <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="">
-          <option selected>Disaster Level</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-        <label for="floatingSelect">Choose how level of worse</label>
-      </div>
+        <h3></h3>
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" name="levels" aria-label="">
+            <option selected>Disaster Level</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <label for="floatingSelect">Choose how level of worse</label>
+        </div>
 
-      <a href="./location.php" class="btn btn-primary rounded-4 w-50 mt-5">Confirm Request</a>
-
+        <button type="submit" class="btn btn-primary rounded-4 w-50 mt-5">Confirm Request</button>
+      </form>
     </div>
 
   </div>
