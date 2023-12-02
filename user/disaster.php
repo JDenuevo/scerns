@@ -1,3 +1,10 @@
+<?php 
+if ($_GET['i'] == "victim") {
+  $requestor_type = "v";
+} elseif ($_GET['i'] == "witness") {
+  $requestor_type = "w";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +53,10 @@
     <div class="container text-center">
       <form action="report-qry.php" method="post">
         <h3></h3>
+        <input type="hidden" name="requester_type" value="<?php echo $requestor_type; ?>">
+        <input type="hidden" name="email" value="darwindejesus@gmail.com">
+        <input type="hidden" name="fullname" value="Darwin Eulin De Jesus">
+        <input type="hidden" name="mobile" value="09272515439">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="addressInput" name="address" placeholder="">
           <label for="addressInput">Address</label>

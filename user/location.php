@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +21,7 @@
   <!-- Main Template -->
   <link rel="stylesheet" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 </head>
 
@@ -38,9 +42,53 @@
     
   <div class="container">
 
-    <div>
-      <iframe class="rounded-5" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15440.174965675702!2d120.9945888!3d14.653458500000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b686dd24e859%3A0xe442b57504cbf05f!2sUniversity%20of%20Caloocan%20City%20-%20South%20Campus!5e0!3m2!1sen!2sph!4v1698291916703!5m2!1sen!2sph" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
-    </div>
+  <?php
+    // Your address
+    $address = $_SESSION["address"];
+
+    // Set a user agent
+    ini_set('user_agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
+
+    // Use Nominatim to get coordinates
+    $nom_url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($address);
+    $nom_response = file_get_contents($nom_url);
+
+    if ($nom_response !== false) {
+        $nom_data = json_decode($nom_response);
+
+        // Check if coordinates are available
+        if (!empty($nom_data) && isset($nom_data[0]->lat) && isset($nom_data[0]->lon)) {
+            $lat = $nom_data[0]->lat;
+            $lon = $nom_data[0]->lon;
+
+            // Output coordinates for debugging
+            echo "Latitude: $lat, Longitude: $lon";
+
+            // Output the map with a marker
+  ?>
+  <div id="map" style="height: 290px;"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([<?php echo $lat; ?>, <?php echo $lon; ?>], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([<?php echo $lat; ?>, <?php echo $lon; ?>]).addTo(map)
+      .bindPopup('<?php echo $address; ?>')
+      .openPopup();
+  </script>
+  <?php
+        } else {
+            echo "Unable to retrieve coordinates for the given address.";
+            // Output Nominatim response for debugging
+            var_dump($nom_data);
+        }
+    } else {
+        echo "Failed to retrieve data from Nominatim.";
+    }
+  ?>
 
     <div class="text-center my-4">
       <label class="fw-semibold">WAITING FOR RESPONSE.</label>
@@ -56,16 +104,23 @@
           </div>
           <div class="text-start">
             <h4>Request Number:</h4>
-            <label>012345</label>
+            <label><?php echo $_SESSION["unique_id"]; ?></label>
           </div>
         </div>
         <hr>
         <div>
-          <label>Victim</label><br>
-          <label class="fw-semibold mb-3">Vincent Buhay</label>
+          <h5>Requestor</h5>
+          <label class="fw-semibold mb-3"><?php echo $_SESSION["fullname"]; ?></label>
           <br>
-          <label>Address</label><br>
-          <label class="fw-semibold">1494-C A.MABINI STREET BRGY.10 CALOOCAN CITY</label>
+          <h5>Address</h5>
+          <label class="fw-semibold"><?php echo $_SESSION["address"]; ?></label>
+          <br>
+          <h5>Contact Information</h5><br>
+          <label>Email Address</label><br>
+          <label class="fw-semibold mb-3"><?php echo $_SESSION["email"]; ?></label>
+          <br>
+          <label>Phone Number</label><br>
+          <label class="fw-semibold mb-3"><?php echo $_SESSION["mobile"]; ?></label>
         </div>
       </div>
     </div>
