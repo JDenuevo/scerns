@@ -115,6 +115,12 @@ session_start();
           <h5>Address</h5>
           <label class="fw-semibold"><?php echo $_SESSION["address"]; ?></label>
           <br>
+          <h5>Landmark</h5>
+          <label class="fw-semibold"><?php echo $_SESSION["landmark"]; ?></label>
+          <br>
+          <h5>Request Level</h5>
+          <label class="fw-semibold"><?php echo $_SESSION["levels"]; ?></label>
+          <br>
           <h5>Contact Information</h5><br>
           <label>Email Address</label><br>
           <label class="fw-semibold mb-3"><?php echo $_SESSION["email"]; ?></label>
