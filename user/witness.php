@@ -31,7 +31,7 @@
         <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
       </a>
     </div>
-    <h2>VICTIM</h2>
+    <h2>WITNESS</h2>
   </div>
 
   <br><br>
@@ -42,7 +42,7 @@
     </div>
     <div class="row g-2">
       <div class="col-6">
-        <a href="./medic.php" class="text-decoration-none">
+        <a href="./medic.php?i=witness" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
               <i class="fa-solid fa-truck-medical fa-2xl text-light"></i>
@@ -52,7 +52,7 @@
          </a>
       </div>
       <div class="col-6">
-        <a href="./police.php" class="text-decoration-none">
+        <a href="./police.php?i=witness" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
               <i class="fa-solid fa-building-shield fa-2xl text-light"></i>
@@ -62,7 +62,7 @@
         </a>
       </div>
       <div class="col-6">
-        <a href="./fire.php" class="text-decoration-none">
+        <a href="./fire.php?i=witness" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
               <i class="fa-solid fa-fire fa-2xl text-light"></i>
@@ -72,7 +72,7 @@
         </a>
       </div>
       <div class="col-6">
-        <a href="./disaster.php" class="text-decoration-none">
+        <a href="./disaster.php?i=witness" class="text-decoration-none">
           <div class="card bg-secondary rounded-5 shadow">
             <div class="card-body">
               <i class="fa-solid fa-hurricane fa-2xl text-light"></i>

@@ -14,7 +14,7 @@
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTgb-2Ac9HWylnZwNbCzyiO-Z7rB3HaWI&libraries=places"></script> -->
   <!-- Main Template -->
   <link rel="stylesheet" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -46,14 +46,20 @@
     <div class="container text-center">
       <h3></h3>
       <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="addressInput" placeholder="">
+        <label for="addressInput">Address</label>
+        <ul id="suggestions"></ul>
+      </div>
+      
+      <div class="form-floating mb-3">
         <input type="text" class="form-control" id="floatingInput" placeholder="">
-        <label for="floatingInput">Address</label>
+        <label for="floatingInput">Nearest Landmark</label>
       </div>
 
       <h3></h3>
       <div class="form-floating">
         <select class="form-select" id="floatingSelect" aria-label="">
-          <option selected>Crime Level</option>
+          <option selected disabled>Crime Level</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -74,14 +80,49 @@
 
   <script src="../assets/js/bootstrap.bundle.js"></script>
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
-  <script src="../assets/js/navbarmenu.js"></script>
+
   <script src="../assets/js/all.min.js"></script>
+  <script>
+    // Reference: https://nominatim.org/release-docs/develop/api/Search/
+    function suggestAddresses() {
+        var input = document.getElementById('addressInput');
+        var suggestionsList = document.getElementById('suggestions');
+
+        // Clear previous suggestions
+        suggestionsList.innerHTML = '';
+
+        // Fetch address suggestions from Nominatim API
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${input.value}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            data.forEach(item => {
+              var suggestionItem = document.createElement('li');
+              suggestionItem.textContent = item.display_name;
+              suggestionItem.addEventListener('click', function() {
+                input.value = item.display_name;
+                suggestionsList.innerHTML = ''; // Clear suggestions after selection
+              });
+              suggestionsList.appendChild(suggestionItem);
+            });
+          })
+          .catch(error => console.error('Error fetching address suggestions:', error));
+      }
+
+      // Add an event listener for the 'input' event on the address input
+      document.getElementById('addressInput').addEventListener('input', suggestAddresses);
+</script>
+
 
 </body>
 </html>
 
 <!-- Modal -->
-<div class="modal fade" id="contact-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="contact-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
@@ -188,5 +229,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 

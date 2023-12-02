@@ -46,10 +46,16 @@
     <div class="container text-center">
       <h3></h3>
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="">
-        <label for="floatingInput">Address</label>
+        <input type="text" class="form-control" id="addressInput" placeholder="">
+        <label for="addressInput">Address</label>
+        <ul id="suggestions"></ul>
       </div>
-
+      
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="">
+        <label for="floatingInput">Nearest Landmark</label>
+      </div>
+      
       <h3></h3>
       <div class="form-floating">
         <select class="form-select" id="floatingSelect" aria-label="">
@@ -76,7 +82,40 @@
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
   <script src="../assets/js/navbarmenu.js"></script>
   <script src="../assets/js/all.min.js"></script>
+  <script>
+    // Reference: https://nominatim.org/release-docs/develop/api/Search/
+    function suggestAddresses() {
+        var input = document.getElementById('addressInput');
+        var suggestionsList = document.getElementById('suggestions');
 
+        // Clear previous suggestions
+        suggestionsList.innerHTML = '';
+
+        // Fetch address suggestions from Nominatim API
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${input.value}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            data.forEach(item => {
+              var suggestionItem = document.createElement('li');
+              suggestionItem.textContent = item.display_name;
+              suggestionItem.addEventListener('click', function() {
+                input.value = item.display_name;
+                suggestionsList.innerHTML = ''; // Clear suggestions after selection
+              });
+              suggestionsList.appendChild(suggestionItem);
+            });
+          })
+          .catch(error => console.error('Error fetching address suggestions:', error));
+      }
+
+      // Add an event listener for the 'input' event on the address input
+      document.getElementById('addressInput').addEventListener('input', suggestAddresses);
+</script>
 </body>
 </html>
 
