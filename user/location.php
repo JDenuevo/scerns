@@ -109,23 +109,21 @@ session_start();
         </div>
         <hr>
         <div>
-          <h5>Requestor</h5>
+          <h5>Requestor:</h5>
           <label class="fw-semibold mb-3"><?php echo $_SESSION["fullname"]; ?></label>
           <br>
-          <h5>Address</h5>
+          <h5>Address:</h5>
           <label class="fw-semibold"><?php echo $_SESSION["address"]; ?></label>
+          <br><br>
+          <h5>Landmark: <label class="fw-semibold"><?php echo $_SESSION["landmark"]; ?></label></h5>
           <br>
-          <h5>Landmark</h5>
-          <label class="fw-semibold"><?php echo $_SESSION["landmark"]; ?></label>
+          <h5>Request Level: <label class="fw-semibold"><?php echo $_SESSION["levels"]; ?></label></h5>
           <br>
-          <h5>Request Level</h5>
-          <label class="fw-semibold"><?php echo $_SESSION["levels"]; ?></label>
-          <br>
-          <h5>Contact Information</h5><br>
-          <label>Email Address</label><br>
+          <h5>Requester Contact Informations</h5>
+          <label>Email Address:</label><br>
           <label class="fw-semibold mb-3"><?php echo $_SESSION["email"]; ?></label>
           <br>
-          <label>Phone Number</label><br>
+          <label>Phone Number:</label><br>
           <label class="fw-semibold mb-3"><?php echo $_SESSION["mobile"]; ?></label>
         </div>
       </div>
