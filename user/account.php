@@ -1,3 +1,6 @@
+<?php 
+include 'php-header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,23 +30,31 @@
     <!-- TOP NAVBAR -->
     <?php include '../user/components/navbar-top.php'; ?>
   </div>
-
+  <?php
+    $sql = "SELECT username FROM scerns_login WHERE email = '$email'";
+    $results = mysqli_query($conn, $sql);
+  
+    if ($results) {
+      $row = mysqli_fetch_assoc($results);
+    }
+    ?>
   <div class="container p-4">
-    <form action="" method="post"> 
+    
       <h3 class="mb-3">Manage your Account</h3>
-      
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="" name="" placeholder="">
-        <label for="">Username</label>
-      </div>
-      
-      <div class="form-floating mb-3 text-start" style="position: relative;">
-        <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" value="<?php if(isset($_COOKIE['qbtuyqug'])) echo $_SESSION['qbtuyqug']; ?>" required>
-        <label for="floatingPassword">Password</label>
-        <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
-      </div>
+      <form action="../php/change_profle.php" method="post"> 
+        <div class="form-floating mb-3">
+          <input type="hidden" name="email" value="<?php echo $email; ?>" />
+          <input type="text" class="form-control" id="username" name="username" placeholder="New Username" value="<?php echo $row['username'];?>">
+          <label for="username">Username</label>
+        </div>
+        
+        <div class="form-floating mb-3 text-start" style="position: relative;">
+          <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+          <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
+        </div>
 
-      <button type="submit" class="btn btn-primary rounded-4 w-100">Save changes</button>
+        <button type="submit" class="btn btn-primary rounded-4 w-100">Save changes</button>
     </form>
   </div>
 
