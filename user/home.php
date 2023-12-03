@@ -24,13 +24,8 @@
 <body>
 
   <div class="text-center home-cont">
-    <div class="d-flex justify-content-around pt-3">
-      <a href="./home.php"><img src="../assets/img/orig-logo.png" class="img-fluid" width="50px"></a>
-      <h2 class="fw-semibold text-secondary">SCERNS</h2>
-      <a href="../index.php" class="text-deconration-none text-secondary">
-        <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
-      </a>
-    </div>
+    <!-- TOP NAVBAR -->
+    <?php include '../user/components/navbar-top.php'; ?>
 
     <div class="p-3 text-start my-2">
       <h3 class="fw-semibold text-secondary">Welcome to <span class="fw-bold">SCERNS</span></h3>
@@ -48,10 +43,9 @@
   </div>
 
   <div class="container text-center">
-    <label class="text-dark">TAP THE BUTTON TO SEND ALERTS.</label>
-    <br>
-    <label class="text-dark">TAP TWICE TO INPUT ADDITIONAL INFORMATION</label>
+    <label class="text-semibold text-dark fs-3">TAP THE BUTTON TO SEND ALERTS.</label>
   </div>
+
   <br><br>
 
   <br> <br> <br>

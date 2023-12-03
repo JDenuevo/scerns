@@ -28,13 +28,8 @@ session_start();
 <body>
 
   <div class="text-center other-cont">
-    <div class="d-flex justify-content-around pt-3">
-      <a href="./home.php"><img src="../assets/img/orig-logo.png" class="img-fluid" width="50px"></a>
-      <h2>SCERNS</h2>
-      <a href="../index.php" class="text-deconration-none text-secondary">
-        <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
-      </a>
-    </div>
+    <!-- TOP NAVBAR -->
+    <?php include '../user/components/navbar-top.php'; ?>
     <h2>LOCATION</h2>
   </div>
 
@@ -91,7 +86,7 @@ session_start();
   ?>
 
     <div class="text-center my-4">
-      <label class="fw-semibold">WAITING FOR RESPONSE.</label>
+      <label class="fw-semibold" id="loadingLabel">WAITING FOR RESPONSE.</label>
     </div>
 
     <div class="card">
@@ -141,6 +136,31 @@ session_start();
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
   <script src="../assets/js/navbarmenu.js"></script>
   <script src="../assets/js/all.min.js"></script>
+
+  <script>
+    // Function to update the label text with dots
+    function updateLabel() {
+      const label = document.getElementById('loadingLabel');
+      const currentText = label.innerText;
+      const dots = currentText.match(/\./g);
+      const numberOfDots = dots ? dots.length : 0;
+
+      // Limit the number of dots to 3
+      const newDots = numberOfDots < 3 ? '.'.repeat(numberOfDots + 1) : '.';
+
+      label.innerText = `WAITING FOR RESPONSE${newDots}`;
+    }
+
+    // Call the updateLabel function every 500 milliseconds
+    const intervalId = setInterval(updateLabel, 500);
+
+    // Simulate a response after 3000 milliseconds (3 seconds)
+    setTimeout(() => {
+      // Stop the loading animation and update the label text
+      clearInterval(intervalId);
+      document.getElementById('loadingLabel').innerText = 'RESPONSE RECEIVED!';
+    }, 3000);
+  </script>
 
 </body>
 </html>

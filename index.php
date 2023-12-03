@@ -24,9 +24,9 @@
 
 <form action="" method="post">
   <section class="vh-100">
-    <div class="container py-5 h-100">
+    <div class="container p-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5 shadow rounded-4 px-5 py-5 bg-light">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5 shadow rounded-4 p-4 bg-light">
           <div class="text-center" style="border-radius: 1rem;">
 
             <img src="./assets/img/orig-logo.png" class="img-fluid px-1 mb-3">
@@ -53,7 +53,7 @@
 
             <button type="submit" class="btn btn-primary btn-lg m-3 rounded-pill fw-bold w-50 mt-2">Log In</button>
 
-            <div class="d-flex justify-content-around mt-3">
+            <div class="d-flex justify-content-around mt-5">
               <a class="text-decoration-none text-dark">Don't have Account?</a>
               <a class="text-decoration-none text-primary" href="./register.php">Create Account</a>
             </div>
