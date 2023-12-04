@@ -1,3 +1,15 @@
+<?php
+session_start();
+include 'conn.php';
+
+// if (isset($_SESSION['status'])) {
+//     if($_SESSION['status'] == "Logged In As User"){
+//         header("Location: user/home.php");
+//         exit();
+//     }
+// }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +32,12 @@
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body style="background-color: #618264;">
 
-<form action="" method="">
+<form action="php/email_check.php" method="post">
   <section class="vh-100">
     <div class="container p-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -36,7 +49,7 @@
             <p class="text-muted">We will send you a new password in your email.</p>
 
             <div class="form-floating mb-2" id="emailForm">
-                <input type="email" id="" class="form-control rounded-4" placeholder="Email" name="email" autocomplete="" required>
+                <input type="email" id="emailInput" class="form-control rounded-4" placeholder="Email" name="email" autocomplete="" required>
                 <label for="emailInput" class="form-label">Email</label>
             </div>
             
@@ -53,9 +66,30 @@
     </div>
   </section>
 </form>
+<?php
+  // Display error messages if they were passed in the URL
+  if (isset($_GET['errors'])) {
+      $errors = explode(',', $_GET['errors']);
+      foreach ($errors as $error) {
+          echo "<script>Swal.fire({
+                  icon: 'error',
+                  title: 'ERROR',
+                  text: '$error'
+              });</script>";
 
+  }
+  unset($_GET['errors']);
+  }
+?>
 <script src="./assets/js/bootstrap.bundle.js"></script>
 <script src="./assets/js/script.js"></script>
-
+<script>
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        // Reloaded the page using the browser's reload button
+        window.location.href = "forgotpass.php";
+      }
+    }
+</script>
 </body>
 </html>

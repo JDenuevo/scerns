@@ -1,3 +1,18 @@
+<?php
+session_start();
+include 'conn.php';
+
+// if (isset($_SESSION['status'])) {
+//     if($_SESSION['status'] == "Logged In As User"){
+//         header("Location: user/home.php");
+//         exit();
+//     }
+// }
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+}
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +39,7 @@
 
 <body style="background-color: #618264;">
 
-<form action="" method="">
+<form action="php/reset_password.php" id="formnewpass" method="post">
   <section class="vh-100">
     <div class="container p-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,9 +57,11 @@
             </div>
 
             <div class="form-floating mb-3 text-start" style="position: relative;">
-              <input type="password" class="form-control rounded-4" id="ConfirmPassword" name="password" placeholder="Password" value="" required>
+              <input type="hidden" name="email" value="<?php echo $email; ?>">
+              <input type="password" class="form-control rounded-4" id="ConfirmPassword" name="confirm_password" placeholder="Confirm Password" value="" required>
               <label for="ConfirmPassword">Confirm Password</label>
               <span class="toggle-password mt-1" id="togglePassword2"><i class="fa-regular fa-eye"></i></span>
+              <span id="passwordMatch" style="color: red;"></span>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Change Password</button>
@@ -61,32 +78,67 @@
   </section>
 </form>
 
+<!-- Confirmation Script -->
+<script>
+  const newPasswordInput = document.getElementById("NewPassword");
+  const confirmPasswordInput = document.getElementById("ConfirmPassword");
+  const passwordMatchLabel = document.getElementById("passwordMatch");
+  const form = document.getElementById("formnewpass");
+
+  function validatePassword() {
+    const newPassword = newPasswordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (newPassword !== confirmPassword) {
+      passwordMatchLabel.textContent = "Passwords do not match";
+    } else {
+      passwordMatchLabel.textContent = "";
+    }
+  }
+
+  function togglePasswordVisibility(passwordInput, togglePassword) {
+    const type = passwordInput.type === "password" ? "text" : "password";
+    passwordInput.type = type;
+    togglePassword.innerHTML = type === "text" ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+  }
+
+  function handleFormSubmission(event) {
+    validatePassword();
+
+    if (newPasswordInput.value !== confirmPasswordInput.value) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  newPasswordInput.addEventListener("input", validatePassword);
+  confirmPasswordInput.addEventListener("input", validatePassword);
+  form.addEventListener("submit", handleFormSubmission);
+
+  const togglePassword1 = document.getElementById("togglePassword1");
+  const togglePassword2 = document.getElementById("togglePassword2");
+
+  togglePassword1.addEventListener("click", () => {
+    togglePasswordVisibility(newPasswordInput, togglePassword1);
+  });
+
+  togglePassword2.addEventListener("click", () => {
+    togglePasswordVisibility(confirmPasswordInput, togglePassword2);
+  });
+</script>
+
+
+
 <script src="./assets/js/bootstrap.bundle.js"></script>
 <script src="./assets/js/script.js"></script>
 
 <script>
-  const newPasswordInput = document.getElementById('NewPassword');
-  const confirmPasswordInput = document.getElementById('ConfirmPassword');
-  const togglePassword1 = document.getElementById('togglePassword1');
-  const togglePassword2 = document.getElementById('togglePassword2');
-
-  togglePassword1.addEventListener('click', () => {
-    togglePasswordVisibility(newPasswordInput, togglePassword1);
-  });
-
-  togglePassword2.addEventListener('click', () => {
-    togglePasswordVisibility(confirmPasswordInput, togglePassword2);
-  });
-
-  function togglePasswordVisibility(passwordInput, togglePassword) {
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      togglePassword.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
-    } else {
-      passwordInput.type = 'password';
-      togglePassword.innerHTML = '<i class="fa-regular fa-eye"></i>';
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        // Reloaded the page using the browser's reload button
+        window.location.href = "newpass.php";
+      }
     }
-  }
 </script>
 
 </body>

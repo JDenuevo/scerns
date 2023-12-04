@@ -1,3 +1,22 @@
+<?php
+session_start();
+include 'conn.php';
+
+// if (isset($_SESSION['status'])) {
+//     if($_SESSION['status'] == "Logged In As User"){
+//         header("Location: user/home.php");
+//         exit();
+//     }
+// }
+
+if (isset($_SESSION['otp'])) {
+   $otp = $_SESSION['otp'];
+}
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+}
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +43,7 @@
 
 <body style="background-color: #618264;">
 
-<form action="" method="">
+<form method="post" action="php/otp.php">
   <section class="vh-100">
     <div class="container p-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -36,11 +55,12 @@
             <p class="text-muted">Input the otp code we sent in your email.</p>
 
             <div class="form-floating mb-2" id="">
-                <input type="number" id="" class="form-control rounded-4" placeholder="otp" name="" autocomplete="" required>
+                <input type="hidden" name="correct_otp" value="<?php echo $otp; ?>">
+                <input type="number" id="number" class="form-control rounded-4" placeholder="otp" name="otp" autocomplete="" required>
                 <label for="number" class="form-label">OTP</label>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Confirm</button>
+            <button type="submit" onclick="checkCode()" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Confirm</button>
 
             <div class="d-flex justify-content-around mt-5">
               <a class="text-decoration-none text-dark">You remembered your account?</a>
@@ -53,9 +73,33 @@
     </div>
   </section>
 </form>
+<script>
+    function checkCode() {
+        var codeInput = document.getElementById('code').value;
+        var wrongMessage = document.getElementById('wrongMessage');
+        var correctMessage = document.getElementById('correctMessage');
 
+        if (codeInput === '<?php echo $otp;?>') {
+            wrongMessage.style.display = 'none';
+            correctMessage.style.display = 'block';
+            document.getElementById('code').setCustomValidity('');
+
+        } else {
+            wrongMessage.style.display = 'block';
+            correctMessage.style.display = 'none';
+            document.getElementById('code').setCustomValidity('Invalid code');
+        }
+    }
+</script>
 <script src="./assets/js/bootstrap.bundle.js"></script>
 <script src="./assets/js/script.js"></script>
-
+<script>
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        // Reloaded the page using the browser's reload button
+        window.location.href = "otp.php";
+      }
+    }
+</script>
 </body>
 </html>
