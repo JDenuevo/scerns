@@ -51,32 +51,36 @@ unset($_SESSION['email']);
 
             <form onsubmit="return validateForm()" action="php/sign_up.php" method="post">
 
-            <p class="text-muted">Register your account</p>
+              <p class="text-muted">Register your account</p>
 
-            <div class="form-floating mb-2" id="emailForm" style="text-align: left;">
-                <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="Email" name="email" autocomplete="" required>
-                <label for="emailInput" class="form-label">Email</label>
-                <span style="color: red; font-size: 80%;"><?php echo $email; ?></span>
-            </div>
+              <div class="form-floating mb-2" id="emailForm" style="text-align: left;">
+                  <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="Email" name="email" autocomplete="" required>
+                  <label for="emailInput" class="form-label">Email</label>
+                  <span style="color: red; font-size: 80%;"><?php echo $email; ?></span>
+              </div>
 
-            <div class="form-floating mb-2">
-                <input type="text" id="" class="form-control rounded-4" id="floatingInput" placeholder="Username" name="username" value="<?php echo $username; ?>" autocomplete="off" maxlength="20" required>
-                <label for="validationServer01" class="form-label">Username</label>
-            </div>
+              <div class="form-floating mb-2">
+                  <input type="text" id="" class="form-control rounded-4" id="floatingInput" placeholder="Username" name="username" value="<?php echo $username; ?>" autocomplete="off" maxlength="20" required>
+                  <label for="validationServer01" class="form-label">Username</label>
+              </div>
 
-            <div class="form-floating mb-2">
-              <input type="password" id="password" class="form-control rounded-4" name="password" placeholder="Password" minlength="8" maxlength="15" required>
-              <label for="password">Password</label>
-            </div>
+              <div class="form-floating mb-2">
+                <input type="password" id="password" class="form-control rounded-4" name="password" placeholder="Password" minlength="8" maxlength="15" required>
+                <label for="password">Password</label>
+                <span class="toggle-password mt-1" id="togglePassword3"><i class="fa-regular fa-eye"></i></span>
+              </div>
 
-            <div class="form-floating mb-2" style="text-align: left;">
-              <input type="password" class="form-control rounded-4" name="confirm_password" id="confirm_password" placeholder="Confirm Password" minlength="8" maxlength="15" required>
-              <label for="confirm_password" class="form-label">Confirm Password</label>
-              <span id="passwordError" style="color: red; font-size: 80%;"></span>
-            </div>
+              <div class="form-floating mb-2" style="text-align: left;">
+                <input type="password" class="form-control rounded-4" name="confirm_password" id="confirm_password" placeholder="Confirm Password" minlength="8" maxlength="15" required>
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <span id="passwordError" style="color: red; font-size: 80%;"></span>
+                <span class="toggle-password mt-1" id="togglePassword4"><i class="fa-regular fa-eye"></i></span>
+              </div>
+              
+              <button type="submit" name="signup" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Register Account</button>
             
-            <button type="submit" name="signup" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Register Account</button>
             </form>
+
             <div class="d-flex justify-content-around mt-5">
               <a class="text-decoration-none text-dark">Already have an account?</a>
               <a class="text-decoration-none text-primary" href="./index.php">Login</a>
@@ -87,6 +91,32 @@ unset($_SESSION['email']);
       </div>
     </div>
   </section>
+    
+  <script>
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+    const togglePassword3 = document.getElementById('togglePassword3');
+    const togglePassword4 = document.getElementById('togglePassword4');
+
+    togglePassword3.addEventListener('click', () => {
+      togglePasswordVisibility(passwordInput, togglePassword3);
+    });
+
+    togglePassword4.addEventListener('click', () => {
+      togglePasswordVisibility(confirmPasswordInput, togglePassword4);
+    });
+
+    function togglePasswordVisibility(input, togglePassword) {
+      if (input.type === 'password') {
+        input.type = 'text';
+        togglePassword.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+      } else {
+        input.type = 'password';
+        togglePassword.innerHTML = '<i class="fa-regular fa-eye"></i>';
+      }
+    }
+  </script> 
+
   <script>
     function validateForm() {
       var password = document.getElementById("password").value;

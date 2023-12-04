@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SCERNS | Forgot Password</title>
+  <title>SCERNS | OTP</title>
 
   <link rel="icon" href="assets/img/orig-logo.png">
   <script src ="scripts/google-api.js"></script>
@@ -33,11 +33,11 @@
 
             <h1>Forgot Password</h1>
 
-            <p class="text-muted">We will send you a new password in your email.</p>
+            <p class="text-muted">Input the otp code we sent in your email.</p>
 
-            <div class="form-floating mb-2" id="emailForm">
-                <input type="email" id="" class="form-control rounded-4" placeholder="Email" name="email" autocomplete="" required>
-                <label for="emailInput" class="form-label">Email</label>
+            <div class="form-floating mb-2" id="">
+                <input type="number" id="" class="form-control rounded-4" placeholder="otp" name="" autocomplete="" required>
+                <label for="number" class="form-label">OTP</label>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg rounded-pill w-50 mt-2">Confirm</button>

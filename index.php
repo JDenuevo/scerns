@@ -52,9 +52,9 @@ include 'conn.php';
             </div>
 
             <div class="form-floating mb-3 text-start" style="position: relative;">
-                <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" value="<?php echo (isset($_COOKIE['qbtuyqug']) ? $_COOKIE['qbtuyqug'] : ''); ?>" required>
-                <label for="floatingPassword">Password</label>
-                <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
+              <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" value="<?php echo (isset($_COOKIE['qbtuyqug']) ? $_COOKIE['qbtuyqug'] : ''); ?>" required>
+              <label for="floatingPassword">Password</label>
+              <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
             </div>
 
 
