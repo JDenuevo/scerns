@@ -70,13 +70,26 @@
 </div>
 
 <?php
-  $sql = "SELECT prof_img, fullname FROM scerns_login WHERE email = '$email'";
+  $sql = "SELECT * FROM scerns_login WHERE email = '$email'";
   $results = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($results);
-  
-  $profile = $row['prof_img'] ? $row['prof_img'] : '../assets/img/default.jpg';
-  $fullname = $row['fullname'];
-?>
+
+  // Check if the image is null or empty
+  if ($row['prof_img'] == null || empty($row['prof_img'])) {
+      // Set default image path if img is null or empty
+      $src = "../assets/img/default.jpg";
+  } else {
+      // Use the image from the database
+      $imageData = base64_encode($row['prof_img']);
+
+      // Determine the image MIME type based on the content
+      $imageInfo = getimagesizefromstring(base64_decode($imageData));
+      $mime_type = $imageInfo['mime'];
+
+      // Construct the src attribute dynamically
+      $src = "data:{$mime_type};base64,{$imageData}";
+  }
+  ?>
 <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="off-nav2" aria-labelledby="staticBackdropLabel"> 
   <div class="offcanvas-body bg-primary">
     <div class="d-flex justify-content-between">
@@ -86,9 +99,9 @@
     <div class="container d-flex flex-column justify-content-center text-center">
       <label class="fw-semibold text-light">My Profile</label>
       <div class="">
-        <img src="<?php echo $profile; ?>" class="img-fluid rounded-circle w-25">
+        <img src="<?php echo $src; ?>"  class="img-fluid rounded-circle w-25">
       </div>
-      <label class="fw-semibold text-light"><?php echo $fullname; ?></label>
+      <label class="fw-semibold text-light"><?php echo $row['fullname']; ?></label>
     </div>
 
     <hr class="py-2" style="color: #FFF; border-width: 3px;">

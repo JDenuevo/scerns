@@ -16,7 +16,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateSql = "UPDATE scerns_login SET";
     $params = array();
 
+    if (isset($_FILES["prof_img"]) && $_FILES["prof_img"]["error"] == 0) {
+        // Check if the file is an image
+        $imageInfo = getimagesize($_FILES["prof_img"]["tmp_name"]);
+        if ($imageInfo !== false) {
+            // Process the uploaded file
+            $imageData = file_get_contents($_FILES["prof_img"]["tmp_name"]);
+    
+            // Include the image BLOB in the update SQL statement
+            $updateSql .= " prof_img = ?";
+            $params[] = $imageData;
+    
+            // Update the database
+            $stmt = mysqli_prepare($conn, $updateSql);
+    
+            // Bind parameters
+            $types = str_repeat("s", count($params));
+            mysqli_stmt_bind_param($stmt, $types, ...$params);
+    
+            // Execute the statement
+            mysqli_stmt_execute($stmt);
+    
+            // Check for errors
+            if (mysqli_stmt_errno($stmt)) {
+                // Handle the error
+                echo "Error updating profile image: " . mysqli_stmt_error($stmt);
+            } else {
+                // Success message or redirection
+                echo "Profile image updated successfully!";
+            }
+    
+            // Close the statement
+            mysqli_stmt_close($stmt);
+        } else {
+            // Handle the case where the uploaded file is not an image
+            echo "Invalid file format. Please upload an image.";
+        }
+    }
+
     if ($newUsername != $username) {
+        $updateSql .= empty($params) ? "" : ",";
         $updateSql .= " username = ?";
         $params[] = $newUsername;
     }
