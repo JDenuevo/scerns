@@ -99,7 +99,7 @@
     <div class="container d-flex flex-column justify-content-center text-center">
       <label class="fw-semibold text-light">My Profile</label>
       <div class="">
-        <img src="<?php echo $src; ?>"  class="img-fluid rounded-circle w-25">
+        <img src="<?php echo $src; ?>"  class="img-fluid rounded-circle" style="width: 80px; height: 80px;">
       </div>
       <label class="fw-semibold text-light"><?php echo $row['fullname']; ?></label>
     </div>
