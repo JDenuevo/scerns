@@ -41,7 +41,16 @@ include 'php-header.php';
   <div class="container p-4">
     
       <h3 class="mb-3">Manage your Account</h3>
-      <form action="../php/change_profle.php" method="post"> 
+      <form action="../php/change_profle.php" method="post">
+
+        <div class="text-center mb-3">
+          <img id="existingImage" src="../assets/img/annabelle.jpg" alt="" width="200" height="200" class="rounded-circle">
+          <br>
+          <label class="form-label mt-2">Change Profile</label>
+          <br>
+          <input class="form-control form-control-sm w-50 mx-auto" id="imageInput" type="file" accept=".jpeg, .jpg, .png">
+        </div>
+
         <div class="form-floating mb-3">
           <input type="hidden" name="id" value="<?php echo $row['id'];?>">
           <input type="text" class="form-control" id="username" name="username" value="<?php echo $row['username']; ?>">
@@ -85,7 +94,6 @@ include 'php-header.php';
 
     
   <script>
-
   const passwordInput = document.getElementById('floatingPassword');
   const togglePassword = document.getElementById('togglePassword');
 
@@ -99,6 +107,26 @@ include 'php-header.php';
     }
   });
 
+  document.getElementById('imageInput').addEventListener('change', function (event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const validImageTypes = ["image/jpeg", "image/png"];
+
+        if (validImageTypes.includes(file.type)) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            document.getElementById('existingImage').src = e.target.result;
+          };
+
+          reader.readAsDataURL(file);
+        } else {
+          alert("Please select a valid JPEG or PNG file.");
+          input.value = "";
+        }
+      }
+    });
   </script>
  
 </body>

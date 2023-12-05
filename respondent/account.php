@@ -31,6 +31,14 @@
   <div class="container p-4">
     <form action="" method="post"> 
       <h3 class="mb-3">Manage your Account</h3>
+
+      <div class="text-center mb-3">
+        <img id="existingImage" src="../assets/img/annabelle.jpg" alt="" width="200" height="200" class="rounded-circle">
+        <br>
+        <label class="form-label mt-2">Change Profile</label>
+        <br>
+        <input class="form-control form-control-sm w-50 mx-auto" id="imageInput" type="file" accept=".jpeg, .jpg, .png">
+      </div>
       
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="" name="" placeholder="">
@@ -59,7 +67,6 @@
 
     
   <script>
-
   const passwordInput = document.getElementById('floatingPassword');
   const togglePassword = document.getElementById('togglePassword');
 
@@ -73,6 +80,26 @@
     }
   });
 
+  document.getElementById('imageInput').addEventListener('change', function (event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const validImageTypes = ["image/jpeg", "image/png"];
+
+        if (validImageTypes.includes(file.type)) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            document.getElementById('existingImage').src = e.target.result;
+          };
+
+          reader.readAsDataURL(file);
+        } else {
+          alert("Please select a valid JPEG or PNG file.");
+          input.value = "";
+        }
+      }
+    });
   </script>
  
 </body>
