@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $requester_type = $_POST["requester_type"];
     $email = $_POST["email"];
+    $type_of_emergency = $_POST["type_of_emergency"];
     $fullname = $_POST["fullname"];
     $mobile = $_POST["mobile"];
     $address = $_POST["address"];
@@ -19,11 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $unique_id = generateUniqueID($conn, $requester_type);
 
     // Insert data into the database
-    $sql = "INSERT INTO scerns_reports (id, fullname, email, mobile, address, landmark, levels) VALUES ('$unique_id', '$fullname', '$email', '$mobile', '$address', '$landmark', '$levels')";
+    $sql = "INSERT INTO scerns_reports (id,type_of_emergency, fullname, email, mobile, address, landmark, levels) VALUES ('$unique_id', '$type_of_emergency', '$fullname', '$email', '$mobile', '$address', '$landmark', '$levels')";
 
     if ($conn->query($sql) === TRUE) {
         // Store data in session
         $_SESSION["unique_id"] = $unique_id;
+        $_SESSION["type_of_emergency"] = $type_of_emergency;
         $_SESSION["fullname"] = $fullname;
         $_SESSION["requester_type"] = $requester_type;
         $_SESSION["email"] = $email;

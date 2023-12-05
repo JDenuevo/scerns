@@ -54,9 +54,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
             // authenticate the user
             if ($row['password'] === $pass) {
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['id'] = $row['id'];
                 $_SESSION['email'] = $row['email'];
+                $_SESSION['fullname'] = $row['fullname'];
+                $_SESSION['contact_number'] = $row['contact_number'];
                 $_SESSION['status'] = "Logged In As User";
                 header("Location: ../user/home.php");
                 exit();

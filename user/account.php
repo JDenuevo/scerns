@@ -31,7 +31,7 @@ include 'php-header.php';
     <?php include '../user/components/navbar-top.php'; ?>
   </div>
   <?php
-    $sql = "SELECT username FROM scerns_login WHERE email = '$email'";
+    $sql = "SELECT * FROM scerns_login WHERE email = '$email'";
     $results = mysqli_query($conn, $sql);
   
     if ($results) {
@@ -43,11 +43,26 @@ include 'php-header.php';
       <h3 class="mb-3">Manage your Account</h3>
       <form action="../php/change_profle.php" method="post"> 
         <div class="form-floating mb-3">
-          <input type="hidden" name="email" value="<?php echo $email; ?>" />
-          <input type="text" class="form-control" id="username" name="username" placeholder="New Username" value="<?php echo $row['username'];?>">
+          <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+          <input type="text" class="form-control" id="username" name="username" value="<?php echo $row['username']; ?>">
           <label for="username">Username</label>
         </div>
-        
+
+        <div class="form-floating mb-3">
+          <input type="text" id="Fullname" class="form-control rounded-4" id="floatingInput" name="fullname" value="<?php echo $row['fullname']; ?>" autocomplete="off" required pattern="^[A-Za-z\s]+$">
+          <label for="Fullname">Fullname</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" id="Contact" class="form-control rounded-4" name="contact_number" value="<?php echo $row['contact_number']; ?>" autocomplete="off" required pattern="[0-9]{11}">
+          <label for="Contact">Contact Number</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="email" id="Email" class="form-control rounded-4" name="email" value="<?php echo $row['email']; ?>" autocomplete="off" required>
+          <label for="Email">Contact Number</label>
+        </div>
+
         <div class="form-floating mb-3 text-start" style="position: relative;">
           <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password">
           <label for="floatingPassword">Password</label>

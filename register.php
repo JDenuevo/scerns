@@ -11,9 +11,13 @@ include 'conn.php';
 // Check if the session variables are set
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+$contact_number = isset($_SESSION['contact_number']) ? $_SESSION['contact_number'] : '';
+$fullname = isset($_SESSION['fullname']) ? $_SESSION['fullname'] : '';
 
 // Clear the session variables
+unset($_SESSION['fullname']);
 unset($_SESSION['username']);
+unset($_SESSION['contact_number']);
 unset($_SESSION['email']);
 ?>
 <!DOCTYPE html>
@@ -53,11 +57,23 @@ unset($_SESSION['email']);
 
               <p class="text-muted">Register your account</p>
 
+              <div class="form-floating mb-2">
+                <input type="text" id="" class="form-control rounded-4" id="floatingInput" placeholder="Juan Dela Cruz" name="fullname" value="<?php echo $fullname; ?>" autocomplete="off" required pattern="^[A-Za-z\s]+$">
+                <label for="validationServer01" class="form-label">Fullname</label>
+            </div>
+
+
               <div class="form-floating mb-2" id="emailForm" style="text-align: left;">
                   <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="Email" name="email" autocomplete="" required>
                   <label for="emailInput" class="form-label">Email</label>
                   <span style="color: red; font-size: 80%;"><?php echo $email; ?></span>
               </div>
+
+              <div class="form-floating mb-2">
+                <input type="text" id="floatingInput" class="form-control rounded-4" placeholder="09123456789" name="contact_number" value="<?php echo $contact_number; ?>" autocomplete="off" required pattern="[0-9]{11}">
+                <label for="floatingInput" class="form-label">Contact Number</label>
+              </div>
+
 
               <div class="form-floating mb-2">
                   <input type="text" id="" class="form-control rounded-4" id="floatingInput" placeholder="Username" name="username" value="<?php echo $username; ?>" autocomplete="off" maxlength="20" required>

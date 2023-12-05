@@ -1,3 +1,6 @@
+<?php 
+include 'php-header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +81,7 @@
 
     <div class="container text-center pt-5">
       <button data-bs-toggle="modal" data-bs-target="#contact-modal" class="btn btn-primary rounded-pill border fs-4">
-        <i class="fa-solid fa-address-book"></i> EMERGENCY CONTANTS
+        <i class="fa-solid fa-address-book"></i> EMERGENCY CONTACTS
       </button>
     </div>
   </div>

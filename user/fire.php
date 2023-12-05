@@ -1,4 +1,7 @@
 <?php 
+include 'php-header.php';
+?>
+<?php 
 if ($_GET['i'] == "victim") {
   $requestor_type = "v";
 } elseif ($_GET['i'] == "witness") {
@@ -57,9 +60,10 @@ if ($_GET['i'] == "victim") {
       <form action="report-qry.php" method="post"> 
         <h3></h3>
         <input type="hidden" name="requester_type" value="<?php echo $requestor_type; ?>">
-        <input type="hidden" name="email" value="darwindejesus@gmail.com">
-        <input type="hidden" name="fullname" value="Darwin Eulin De Jesus">
-        <input type="hidden" name="mobile" value="09272515439">
+        <input type="hidden" name="type_of_emergency" value="Fire">
+        <input type="hidden" name="email" value="<?php echo $email; ?>">
+        <input type="hidden" name="fullname" value="<?php echo $fullname; ?>">
+        <input type="hidden" name="mobile" value="<?php echo $contact_number; ?>">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="addressInput" name="address" placeholder="" required>
           <label for="addressInput">Address</label>

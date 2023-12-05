@@ -69,7 +69,14 @@
   </div>
 </div>
 
-
+<?php
+  $sql = "SELECT prof_img, fullname FROM scerns_login WHERE email = '$email'";
+  $results = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($results);
+  
+  $profile = $row['prof_img'] ? $row['prof_img'] : '../assets/img/default.jpg';
+  $fullname = $row['fullname'];
+?>
 <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="off-nav2" aria-labelledby="staticBackdropLabel"> 
   <div class="offcanvas-body bg-primary">
     <div class="d-flex justify-content-between">
@@ -79,9 +86,9 @@
     <div class="container d-flex flex-column justify-content-center text-center">
       <label class="fw-semibold text-light">My Profile</label>
       <div class="">
-        <img src="../assets/img/annabelle.jpg" class="img-fluid rounded-circle w-25">
+        <img src="<?php echo $profile; ?>" class="img-fluid rounded-circle w-25">
       </div>
-      <label class="fw-semibold text-light">Annabelle Rama</label>
+      <label class="fw-semibold text-light"><?php echo $fullname; ?></label>
     </div>
 
     <hr class="py-2" style="color: #FFF; border-width: 3px;">
