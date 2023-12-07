@@ -1,3 +1,7 @@
+<?php 
+include '../conn.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,30 +32,52 @@
     <?php include '../respondent/components/navbar-top.php'; ?>
   </div>
 
+  <?php
+  $sql = "SELECT * FROM scerns_respondents";
+  $results = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($results);
+
+  // Check if the image is null or empty
+  if ($row['prof_img'] == null || empty($row['prof_img'])) {
+      // Set default image path if img is null or empty
+      $src = "../assets/img/default.jpg";
+  } else {
+      // Use the image from the database
+      $imageData = base64_encode($row['prof_img']);
+
+      // Determine the image MIME type based on the content
+      $imageInfo = getimagesizefromstring(base64_decode($imageData));
+      $mime_type = $imageInfo['mime'];
+
+      // Construct the src attribute dynamically
+      $src = "data:{$mime_type};base64,{$imageData}";
+  }
+  ?>
   <div class="container p-4">
-    <form action="" method="post"> 
+    
       <h3 class="mb-3">Manage your Account</h3>
+      <form action="../php/change_profile_respondent.php" method="post" enctype="multipart/form-data">
 
-      <div class="text-center mb-3">
-        <img id="existingImage" src="../assets/img/annabelle.jpg" alt="" width="200" height="200" class="rounded-circle">
-        <br>
-        <label class="form-label mt-2">Change Profile</label>
-        <br>
-        <input class="form-control form-control-sm w-50 mx-auto" id="imageInput" type="file" accept=".jpeg, .jpg, .png">
-      </div>
-      
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="" name="" placeholder="">
-        <label for="">Username</label>
-      </div>
-      
-      <div class="form-floating mb-3 text-start" style="position: relative;">
-        <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" value="<?php if(isset($_COOKIE['qbtuyqug'])) echo $_SESSION['qbtuyqug']; ?>" required>
-        <label for="floatingPassword">Password</label>
-        <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
-      </div>
+        <div class="text-center mb-3 ">
+          <img id="existingImage" src="<?php echo $src; ?>" alt="" width="200" height="200" class="rounded-circle border border-dark">
+          <br>
+          <label class="form-label mt-2">Change Profile</label>
+          <br>
+          <input class="form-control form-control-sm w-50 mx-auto" id="imageInput" name="prof_img" type="file" accept=".jpeg, .jpg, .png">
+        </div>
 
-      <button type="submit" class="btn btn-primary rounded-4 w-100">Save changes</button>
+        <div class="form-floating mb-3">
+        <input type="text" id="Fullname" class="form-control rounded-4" name="name" value="<?php echo $row['name']; ?>" autocomplete="off" required pattern="^[A-Za-z\s]+$">
+          <label for="Fullname">Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+        <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+          <input type="text" id="Contact" class="form-control rounded-4" name="contact_number" value="<?php echo $row['contact_number']; ?>" autocomplete="off" required pattern="[0-9]{11}">
+          <label for="Contact">Contact Number</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary rounded-4 w-100">Save changes</button>
     </form>
   </div>
 

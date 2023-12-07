@@ -54,7 +54,7 @@ include 'php-header.php';
   <div class="container p-4">
     
       <h3 class="mb-3">Manage your Account</h3>
-      <form action="../php/change_profle.php" method="post" enctype="multipart/form-data">
+      <form action="../php/change_profile.php" method="post" enctype="multipart/form-data">
 
         <div class="text-center mb-3 ">
           <img id="existingImage" src="<?php echo $src; ?>" alt="" width="200" height="200" class="rounded-circle border border-dark">
