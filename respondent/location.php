@@ -52,15 +52,20 @@ session_start();
     
   <div class="container">
 
-    <div class="dropdown mb-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Status
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">10-70</a></li>
-        <li><a class="dropdown-item" href="#">Fire Out</a></li>
-        <li><a class="dropdown-item" href="#">Emergency</a></li>
-      </ul>
+    <div class="d-flex justify-content-between align-items-center">
+
+      <a href="./home.php"><i class="fa-solid fa-arrow-left fa-2xl text-secondary"></i></a>
+
+      <div class="dropdown mb-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Status
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">10-70</a></li>
+          <li><a class="dropdown-item" href="#">Fire Out</a></li>
+          <li><a class="dropdown-item" href="#">Emergency</a></li>
+        </ul>
+      </div>
     </div>
 
     <div>

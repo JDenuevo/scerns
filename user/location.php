@@ -37,6 +37,8 @@ include 'php-header.php';
     
   <div class="container">
 
+  <a href="./home.php"><i class="fa-solid fa-arrow-left fa-2xl text-secondary"></i></a>
+
   <?php
     // Your address
     $address = $_SESSION["address"];
