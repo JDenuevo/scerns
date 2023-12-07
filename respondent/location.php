@@ -48,15 +48,25 @@
     
   <div class="container">
 
+    <div class="dropdown mb-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Status
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">10-70</a></li>
+        <li><a class="dropdown-item" href="#">Fire Out</a></li>
+        <li><a class="dropdown-item" href="#">Emergency</a></li>
+      </ul>
+    </div>
+
     <div>
       <iframe class="rounded-5" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15440.174965675702!2d120.9945888!3d14.653458500000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b686dd24e859%3A0xe442b57504cbf05f!2sUniversity%20of%20Caloocan%20City%20-%20South%20Campus!5e0!3m2!1sen!2sph!4v1698291916703!5m2!1sen!2sph" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
     </div>
 
-    <div class="container">
-      <div class="d-flex justify-content-around">
-          <button class="btn btn-secondary rounded-4 border shadow p-2 w-50 fw-semibold mx-2">VIEW</button>
-          <button class="btn btn-secondary rounded-4 border shadow p-2 w-50 fw-semibold mx-2">RESPOND</button>
-      </div>
+    <div class="text-center">
+     
+      <button class="btn btn-secondary rounded-4 border shadow p-2 w-50 fw-semibold mx-2">RESPOND</button>
+      
     </div>
 
     <hr style="color: #000; border-width: 3px;">
@@ -81,26 +91,26 @@
           <ol class="breadcrumb d-flex justify-content-around">
             <li class="breadcrumb-item">
               <div class="d-flex flex-column align-items-center my-2">
-                <div class="rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
-                  <i class="fa-solid fa-truck-medical fa-xl text-primary"></i>
-                </div>
+                <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center active" style="height: 60px; width: 60px;">
+                  <i class="fa-solid fa-truck-medical fa-xl text-light"></i>
+                </button>
                 <div class="text-center mt-2">Move</div>
               </div>
             </li>
             <li class="breadcrumb-item">
               <div class="d-flex flex-column align-items-center my-2">
-                <div class="rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
-                  <i class="fa-solid fa-shuffle fa-xl text-primary"></i>
-                </div>
+                <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;" disabled>
+                  <i class="fa-solid fa-shuffle fa-xl text-light"></i>
+                </button>
                 <div class="text-center mt-2">Enroute</div>
               </div>
             </li>
             <li class="breadcrumb-item">
               <div class="d-flex flex-column align-items-center my-2">
-                <div class="rounded-circle border border-5 border-dark d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
-                  <i class="fa-solid fa-helicopter-symbol fa-xl text-primary"></i>
-                </div>
-                <div class="text-center mt-2">Arrive</div>
+                <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;" disabled>
+                  <i class="fa-solid fa-helicopter-symbol fa-xl text-light"></i>
+                </button>
+                <div class="text-center mt-2">Arrived</div>
               </div>
             </li>
           </ol>
