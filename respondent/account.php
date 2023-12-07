@@ -33,7 +33,7 @@ session_start();
   </div>
 
   <?php
-  $sql = "SELECT * FROM scerns_login WHERE email = '$email'";
+  $sql = "SELECT * FROM scerns_respondents WHERE id = 1";
   $results = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($results);
 
@@ -56,7 +56,7 @@ session_start();
   <div class="container p-4">
     
       <h3 class="mb-3">Manage your Account</h3>
-      <form action="../php/change_profile.php" method="post" enctype="multipart/form-data">
+      <form action="../php/change_profile_respondent.php" method="post" enctype="multipart/form-data">
 
         <div class="text-center mb-3 ">
           <img id="existingImage" src="<?php echo $src; ?>" alt="" width="200" height="200" class="rounded-circle border border-dark">
@@ -67,30 +67,13 @@ session_start();
         </div>
 
         <div class="form-floating mb-3">
-          <input type="hidden" name="id" value="<?php echo $row['id'];?>">
-          <input type="text" class="form-control" id="username" name="username" value="<?php echo $row['username']; ?>">
-          <label for="username">Username</label>
-        </div>
-
-        <div class="form-floating mb-3">
-          <input type="text" id="Fullname" class="form-control rounded-4" id="floatingInput" name="fullname" value="<?php echo $row['fullname']; ?>" autocomplete="off" required pattern="^[A-Za-z\s]+$">
-          <label for="Fullname">Fullname</label>
+          <input type="text" id="Fullname" class="form-control rounded-4" id="floatingInput" name="name" value="<?php echo $row['name']; ?>" autocomplete="off" required pattern="^[A-Za-z\s]+$">
+          <label for="Fullname">Respondent's Name</label>
         </div>
 
         <div class="form-floating mb-3">
           <input type="text" id="Contact" class="form-control rounded-4" name="contact_number" value="<?php echo $row['contact_number']; ?>" autocomplete="off" required pattern="[0-9]{11}">
           <label for="Contact">Contact Number</label>
-        </div>
-
-        <div class="form-floating mb-3">
-          <input type="email" id="Email" class="form-control rounded-4" name="email" value="<?php echo $row['email']; ?>" autocomplete="off" required>
-          <label for="Email">Contact Number</label>
-        </div>
-
-        <div class="form-floating mb-3 text-start" style="position: relative;">
-          <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-          <span class="toggle-password mt-1" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
         </div>
 
         <button type="submit" class="btn btn-primary rounded-4 w-100">Save changes</button>
@@ -109,19 +92,6 @@ session_start();
 
     
   <script>
-  const passwordInput = document.getElementById('floatingPassword');
-  const togglePassword = document.getElementById('togglePassword');
-
-  togglePassword.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-          passwordInput.type = 'text';
-          togglePassword.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
-      } else {
-        passwordInput.type = 'password';
-        togglePassword.innerHTML = '<i class="fa-regular fa-eye"></i>';
-    }
-  });
-
   document.getElementById('imageInput').addEventListener('change', function (event) {
       const input = event.target;
       if (input.files && input.files[0]) {
