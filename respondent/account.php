@@ -67,6 +67,7 @@ session_start();
         </div>
 
         <div class="form-floating mb-3">
+          <input type="hidden" name="id" value="<?php echo $row['id'];?>">
           <input type="text" id="Fullname" class="form-control rounded-4" id="floatingInput" name="name" value="<?php echo $row['name']; ?>" autocomplete="off" required pattern="^[A-Za-z\s]+$">
           <label for="Fullname">Respondent's Name</label>
         </div>
