@@ -1,6 +1,10 @@
 <?php 
 include '../conn.php';
 session_start();
+if(isset($_GET['id'])) {
+  // Retrieve the value of the 'id' parameter
+  $id = $_GET['id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,9 +72,57 @@ session_start();
       </div>
     </div>
 
-    <div>
-      <iframe class="rounded-5" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15440.174965675702!2d120.9945888!3d14.653458500000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b686dd24e859%3A0xe442b57504cbf05f!2sUniversity%20of%20Caloocan%20City%20-%20South%20Campus!5e0!3m2!1sen!2sph!4v1698291916703!5m2!1sen!2sph" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
-    </div>
+    <?php
+    // Your address
+    $sql = "SELECT address FROM scerns_reports WHERE id = '$id'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    $address = $row['address'];
+
+    // Set a user agent
+    ini_set('user_agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
+
+    // Use Nominatim to get coordinates
+    $nom_url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($address);
+    $nom_response = file_get_contents($nom_url);
+
+    if ($nom_response !== false) {
+        $nom_data = json_decode($nom_response);
+
+        // Check if coordinates are available
+        if (!empty($nom_data) && isset($nom_data[0]->lat) && isset($nom_data[0]->lon)) {
+            $lat = $nom_data[0]->lat;
+            $lon = $nom_data[0]->lon;
+
+            // Output coordinates for debugging
+            echo "Latitude: $lat, Longitude: $lon";
+
+            // Output the map with a marker
+      ?>
+      <div id="map" style="height: 300px;"></div>
+      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+      <script>
+        var map = L.map('map').setView([<?php echo $lat; ?>, <?php echo $lon; ?>], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([<?php echo $lat; ?>, <?php echo $lon; ?>]).addTo(map)
+          .bindPopup('<?php echo $address; ?>')
+          .openPopup();
+      </script>
+      <?php
+            } else {
+                echo "Unable to retrieve coordinates for the given address.";
+                // Output Nominatim response for debugging
+                var_dump($nom_data);
+            }
+        } else {
+            echo "Failed to retrieve data from Nominatim.";
+        }
+      ?>
 
     <div class="text-center">
      
