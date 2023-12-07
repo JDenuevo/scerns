@@ -71,7 +71,7 @@
 
 
 <?php
-  $sql = "SELECT * FROM scerns_respondents";
+  $sql = "SELECT * FROM scerns_respondents WHERE id = 1";
   $results = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($results);
 
