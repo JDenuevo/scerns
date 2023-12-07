@@ -5,6 +5,11 @@ if(isset($_GET['id'])) {
   // Retrieve the value of the 'id' parameter
   $id = $_GET['id'];
 }
+
+if(isset($_GET['type'])) {
+  // Retrieve the value of the 'id' parameter
+  $type = $_GET['type'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +78,7 @@ if(isset($_GET['id'])) {
     </div>
 
     <?php
-    // Your address
+  
     $sql = "SELECT address FROM scerns_reports WHERE id = '$id'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -100,7 +105,7 @@ if(isset($_GET['id'])) {
 
             // Output the map with a marker
       ?>
-      <div id="map" style="height: 300px;"></div>
+      <div id="map" style="height: 300px; width: 50%;"></div>
       <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
       <script>
         var map = L.map('map').setView([<?php echo $lat; ?>, <?php echo $lon; ?>], 15);
@@ -124,26 +129,46 @@ if(isset($_GET['id'])) {
         }
       ?>
 
-    <div class="text-center">
+    
      
       <button class="btn btn-secondary rounded-4 border shadow p-2 w-50 fw-semibold mx-2">RESPOND</button>
       
     </div>
 
     <hr style="color: #000; border-width: 3px;">
+    <?php
+      $sql = "SELECT * FROM scerns_respondents WHERE id = 1";
+      $results = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($results);
 
+      // Check if the image is null or empty
+      if ($row['prof_img'] == null || empty($row['prof_img'])) {
+          // Set default image path if img is null or empty
+          $src = "../assets/img/default.jpg";
+      } else {
+          // Use the image from the database
+          $imageData = base64_encode($row['prof_img']);
+
+          // Determine the image MIME type based on the content
+          $imageInfo = getimagesizefromstring(base64_decode($imageData));
+          $mime_type = $imageInfo['mime'];
+
+          // Construct the src attribute dynamically
+          $src = "data:{$mime_type};base64,{$imageData}";
+      }
+      ?>
     <div class="card">
       <div class="card-body text-center">
         <label class="fw-semibold fs-4">Responders Info</label>
         <div class="d-flex align-items-stretch">
           <div class="d-flex flex-row px-3 align-items-center my-2">
             <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;">
-              <img src="../assets/img/annabelle.jpg" class="img-fluid rounded-circle">
+              <img src="<?php echo $src; ?>" class="img-fluid rounded-circle">
             </div>
           </div>
           <div class="text-start my-auto">
-            <h4>Annabelle Rama</h4>
-            <label>+63 970 657 4356</label>
+            <h4><?php echo $row['name']; ?></h4>
+            <label><?php echo $row['contact_number']; ?></label>
           </div>
         </div>
         <hr>

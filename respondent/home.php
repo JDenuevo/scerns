@@ -120,7 +120,7 @@ session_start();
                                 <h6 class="fw-semibold">Date & Time  : <span class="fw-normal">' . $formattedDate . '</span></h6>
                               </div>
                               <div class="d-flex justify-content-center align-items-center">
-                                <a href="./location.php?id=' . $id . '" class="btn btn-secondary rounded-pill shadow p-2 w-50 fw-semibold mx-2"><i class="fa-solid fa-eye"></i> View</a>
+                                <a href="./location.php?id=' . $id . '&?type='.$row['type_of_emergency'].'" class="btn btn-secondary rounded-pill shadow p-2 w-50 fw-semibold mx-2"><i class="fa-solid fa-eye"></i> View</a>
                                 <button class="btn btn-secondary rounded-pill shadow p-2 w-50 fw-semibold mx-2"><i class="fa-solid fa-phone"></i> Call</button>
                               </div>
                             </div>

@@ -30,7 +30,6 @@ if ($_GET['i'] == "victim") {
   <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
-
 <body>
 
   <div class="text-center home-cont">
