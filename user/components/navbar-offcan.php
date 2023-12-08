@@ -44,7 +44,7 @@
       </div>
     </a>
 
-    <a href="./history.php" class="text-dark text-decoration-none">
+    <a href="./history.php?tab=Medic" class="text-dark text-decoration-none">
       <div class="d-flex flex-row px-3 align-items-center my-2">
         <div class="rounded-2 bg-light d-flex align-items-center justify-content-center" style="height: 50px; width: 50px;">
           <i class="fa-solid fa-clock-rotate-left fa-xl"></i>

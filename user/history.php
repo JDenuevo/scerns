@@ -51,125 +51,79 @@ include 'php-header.php';
   </div>
 
   <div class="container p-4">
-   
-    <h3 class="mb-3">History</h3>
 
-    <div class="position-relative my-3">
-      <input type="text" class="form-control rounded-pill border border-dark" id="" placeholder="Search...">
-      <a href="#" id="search" class="search-button">
-        <span class="fa fa-search text-dark me-1"></span>
-      </a>
+        <h3 class="mb-3">History</h3>
+
+        <div class="position-relative my-3">
+            <input type="text" class="form-control rounded-pill border border-dark" id="" placeholder="Search...">
+            <a href="#" id="search" class="search-button">
+                <span class="fa fa-search text-dark me-1"></span>
+            </a>
+        </div>
+        <?php 
+        include 'fetch.php'; // Include the file where fetchDataForTab is defined        
+        ?>
+        <ul class="nav nav-pills nav-tabs mb-3" id="pills-tab" role="tablist">
+            <li class="nav-items" role="presentation">
+                <a class="nav-link <?php echo $tab === 'Medic' ? 'active' : ''; ?>" id="pills-medic-tab" href="history.php?tab=Medic" role="tab" aria-controls="pills-medic" aria-selected="true">
+                    <i class="fa-solid fa-truck-medical"></i> Medic
+                </a>
+            </li>
+            <li class="nav-items" role="presentation">
+                <a class="nav-link <?php echo $tab === 'Police' ? 'active' : ''; ?>" id="pills-police-tab" href="history.php?tab=Police" role="tab" aria-controls="pills-police" aria-selected="false">
+                    <i class="fa-solid fa-building-shield"></i> Police
+                </a>
+            </li>
+            <li class="nav-items" role="presentation">
+                <a class="nav-link <?php echo $tab === 'Fire' ? 'active' : ''; ?>" id="pills-fire-tab" href="history.php?tab=Fire" role="tab" aria-controls="pills-fire" aria-selected="false">
+                    <i class="fa-solid fa-fire"></i> Fire
+                </a>
+            </li>
+            <li class="nav-items" role="presentation">
+                <a class="nav-link <?php echo $tab === 'Disaster' ? 'active' : ''; ?>" id="pills-disaster-tab" href="history.php?tab=Disaster" role="tab" aria-controls="pills-disaster" aria-selected="false">
+                    <i class="fa-solid fa-hurricane"></i> Disaster
+                </a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content" id="pills-tabContent">
+            <?php
+            if (!empty($rows)) {
+                echo "<div class='tab-pane fade show active' id='pills-" . strtolower($tab) . "' role='tabpanel' aria-labelledby='pills-" . strtolower($tab) . "-tab' tabindex='0'>
+                        <div class='table-responsive'>
+                            <table class='table table-bordered'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col'>Case</th>
+                                        <th scope='col'>Respondents</th>
+                                        <th scope='col'>Place</th>
+                                        <th scope='col'>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+                foreach ($rows as $row) {
+                    echo "<tr>
+                            <td>" . htmlspecialchars($row['id']) . "</td>
+                            <td>" . htmlspecialchars($row['respondent_name']) . "</td>
+                            <td>" . htmlspecialchars($row['address']) . "</td>
+                            <td>" . htmlspecialchars($row['date']) . "</td>
+                        </tr>";
+                }
+                echo "</tbody>
+                        </table>
+                    </div>
+                </div>";
+            } else {
+                echo "<p>No data available.</p>";
+            }
+            ?>
+        </div>
+
     </div>
 
-    <ul class="nav nav-pills nav-tabs mb-3" id="pills-tab" role="tablist">
-      <li class="nav-items" role="presentation">
-        <button class="nav-link active" id="pills-medic-tab" data-bs-toggle="pill" data-bs-target="#pills-medic" type="button" role="tab" aria-controls="pills-medic" aria-selected="true"><i class="fa-solid fa-truck-medical"></i> Medic</button>
-      </li>
-      <li class="nav-items" role="presentation">
-        <button class="nav-link" id="pills-police-tab" data-bs-toggle="pill" data-bs-target="#pills-police" type="button" role="tab" aria-controls="pills-police" aria-selected="false"><i class="fa-solid fa-building-shield"></i> Police</button>
-      </li>
-      <li class="nav-items" role="presentation">
-        <button class="nav-link" id="pills-fire-tab" data-bs-toggle="pill" data-bs-target="#pills-fire" type="button" role="tab" aria-controls="pills-fire" aria-selected="false"><i class="fa-solid fa-fire"></i> Fire</button>
-      </li>
-      <li class="nav-items" role="presentation">
-      <button class="nav-link" id="pills-disaster-tab" data-bs-toggle="pill" data-bs-target="#pills-disaster" type="button" role="tab" aria-controls="pills-disaster" aria-selected="false"><i class="fa-solid fa-hurricane"></i> Disaster</button>
-      </li>
-    </ul>
 
-    <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-medic" role="tabpanel" aria-labelledby="pills-medic-tab" tabindex="0">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Case</th>
-                <th scope="col">Respondents</th>
-                <th scope="col">Place</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Fire Alarm #3</th>
-                <td>Caloocan Power Rangers</td>
-                <td>Caloocan</td>
-                <td>December 30, 2023</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="pills-police" role="tabpanel" aria-labelledby="pills-police-tab" tabindex="0">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Case</th>
-                <th scope="col">Respondents</th>
-                <th scope="col">Place</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Fire Alarm #3</th>
-                <td>Caloocan Power Rangers</td>
-                <td>Caloocan</td>
-                <td>December 30, 2023</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="pills-fire" role="tabpanel" aria-labelledby="pills-fire-tab" tabindex="0">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Case</th>
-                <th scope="col">Respondents</th>
-                <th scope="col">Place</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Fire Alarm #3</th>
-                <td>Caloocan Power Rangers</td>
-                <td>Caloocan</td>
-                <td>December 30, 2023</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="pills-disaster" role="tabpanel" aria-labelledby="pills-disaster-tab" tabindex="0">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Case</th>
-                <th scope="col">Respondents</th>
-                <th scope="col">Place</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Fire Alarm #3</th>
-                <td>Caloocan Power Rangers</td>
-                <td>Caloocan</td>
-                <td>December 30, 2023</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-   
-  </div>
-
-  <br> <br> <br>
+    <br> <br> <br>
 
   <!-- BOTTOM NAVBAR -->
   <?php include '../user/components/navbar-bottom.php'; ?>
