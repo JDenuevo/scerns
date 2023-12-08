@@ -78,9 +78,9 @@ if ($_GET['i'] == "victim") {
         <div class="form-floating">
           <select class="form-select" id="floatingSelect" name="levels" aria-label="" required>
             <option selected disabled>Crime Level</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1">Level 1 (Robbery, Holdup, Snatching)</option>
+            <option value="2">Level 2 (Harrasment, Violence)</option>
+            <option value="3">Level 3 (Shooting)</option>
           </select>
           <label for="floatingSelect">Choose a crime level</label>
         </div>

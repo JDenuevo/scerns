@@ -174,6 +174,8 @@ session_start();
 
   <!-- BOTTOM NAVBAR -->
   <?php include '../respondent/components/navbar-bottom.php'; ?>
+  
+  <?php include '../respondent/components/notif-modal.php'; ?>
 
   <script src="../assets/js/bootstrap.bundle.js"></script>
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
