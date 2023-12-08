@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg fixed-bottom sidebar-nav" id="mobile-navbar">
   <ul id="sidebarnav" class="nav nav-pills w-100 mx-2">
-    <li class="nav-item sidebar-item text-center my-auto">
-      <a class="nav-link sidebar-link text-decoration-none text-secondary position-relative" href="./notification.php" aria-expanded="false">
+      <li class="nav-item sidebar-item text-center my-auto">
+      <a class="nav-link sidebar-link text-decoration-none text-secondary position-relative" data-bs-toggle="modal" data-bs-target="#notif-modal-user" id="notification-link">
         <i class="fa-solid fa-bell fa-xl">
           <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger border border-light ms-3">
-            <label>1</label>
+            <label id="notification-count" style="font-size: 13px;"></label>
           </span>
         </i>
       </a>
@@ -21,12 +21,40 @@
     </li>
   </ul>
 </nav>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
  <!-- TOP NAVBAR -->
- <?php include '../user/components/navbar-offcan.php'; ?>
- 
-<style scoped>
+ <?php include '../respondent/components/navbar-offcan.php'; ?>
+  <script>
+    $(document).ready(function() {
+      // Function to update notification counts
+      function updateNotificationCounts() {
+        // Use Ajax to fetch counts from the server
+        $.ajax({
+          url: '../php/fetch_notification_counts_user.php',
+          type: 'GET',
+          success: function(response) {
+            console.log(response); // Log the response for debugging
+            
+            // Check if the response is an object
+            const counts = typeof response === 'object' ? response : JSON.parse(response);
 
+            // Update the UI with the new counts
+            $('#notification-count').text(counts.unread);
+          },
+          error: function(xhr, status, error) {
+            console.error('Error fetching notification counts: ', error);
+          }
+        });
+      }
+
+      // Call the function initially to set initial counts
+      updateNotificationCounts();
+      setInterval(updateNotificationCounts, 1000);
+    });
+  </script>
+
+
+<style scoped>
 #mobile-navbar {
     background-color: #8DA48F;
     height: 80px;
@@ -53,5 +81,7 @@
     font-weight: bold;
     color: #292D32;
 }
-
 </style>
+
+
+

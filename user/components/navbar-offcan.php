@@ -6,7 +6,7 @@
     </div>
 
     <div class="text-center">
-      <label class="fw-semibold text-light">Navbar</label>
+      <label class="fw-semibold text-light">Menu</label>
     </div>
 
     <hr class="py-2" style="color: #FFF; border-width: 3px;">

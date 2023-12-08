@@ -29,7 +29,7 @@ include 'php-header.php';
   <div class="text-center home-cont">
     <!-- TOP NAVBAR -->
     <?php include '../user/components/navbar-top.php'; ?>
-
+    
     <div class="p-3 text-start my-2">
       <h3 class="fw-semibold text-secondary">Welcome to <span class="fw-bold">SCERNS</span></h3>
     </div>
@@ -55,7 +55,8 @@ include 'php-header.php';
 
   <!-- BOTTOM NAVBAR -->
   <?php include '../user/components/navbar-bottom.php'; ?>
-
+  <?php include '../user/components/notif-modal-user.php'; ?>
+  
   <script src="../assets/js/bootstrap.bundle.js"></script>
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
   <script src="../assets/js/navbarmenu.js"></script>

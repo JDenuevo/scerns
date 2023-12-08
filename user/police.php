@@ -95,7 +95,7 @@ if ($_GET['i'] == "victim") {
 
   <!-- BOTTOM NAVBAR -->
   <?php include '../user/components/navbar-bottom.php'; ?>
-
+  <?php include '../user/components/notif-modal-user.php'; ?>
   <script src="../assets/js/bootstrap.bundle.js"></script>
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
 

@@ -28,7 +28,8 @@ include 'php-header.php';
 
   <div class="text-center other-cont">
     <!-- TOP NAVBAR -->
-    <?php include '../respondent/components/navbar-top.php'; ?>
+    <?php include '../user/components/navbar-top.php'; ?>
+
   </div>
 
   <div class="container p-4">
@@ -40,8 +41,8 @@ include 'php-header.php';
   <br> <br> <br>
 
   <!-- BOTTOM NAVBAR -->
-  <?php include '../respondent/components/navbar-bottom.php'; ?>
-
+  <?php include '../user/components/navbar-bottom.php'; ?>
+  <?php include '../user/components/notif-modal-user.php'; ?>
   <script src="../assets/js/bootstrap.bundle.js"></script>
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
   <script src="../assets/js/navbarmenu.js"></script>
