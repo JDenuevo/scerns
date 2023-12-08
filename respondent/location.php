@@ -31,9 +31,10 @@ if(isset($_GET['type'])) {
   <!-- Main Template -->
   <link rel="stylesheet" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>
-
 <style>
   .breadcrumb-item {
   position: relative;
@@ -58,23 +59,64 @@ if(isset($_GET['type'])) {
   </div>
 
   <br>
-    
-  <div class="container">
-
-    <div class="d-flex justify-content-between align-items-center">
-
-      <a href="./home.php"><i class="fa-solid fa-arrow-left fa-2xl text-secondary"></i></a>
-
-      <select class="form-select border border-secondary w-50" aria-label="Default select example">
-        <option selected>Status</option>
-        <option value="1">10-70</option>
-        <option value="2">Fire Out</option>
-        <option value="3">Emergency</option>
-      </select>
+        <?php
+      $sql = "SELECT * FROM scerns_status WHERE id = '$id'";
+      $result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($result);
       
-    </div>
+      $movement = $row['movement'];
 
-    <?php
+      if ($row === null) {
+          // No rows found, so the respondent name does not exist in scerns_status
+          $respondentNameExistsInScernsStatus = true;
+      } else {
+          $respondentNameExistsInScernsStatus = false;
+      }
+
+      if ($row['movement'] == '' || $row['movement'] === null){
+        $showStatus = false;
+      }else{
+        $showStatus = true;
+      }
+        ?>
+  <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+
+        <a href="./home.php"><i class="fa-solid fa-arrow-left fa-2xl text-secondary"></i></a>
+        <?php
+        if ($showStatus) {
+            echo '<select class="form-select border border-secondary w-50" name="emergency_status" id="emergency_status" onchange="updateStatus(\'' . $row['id'] . '\', this.value)">
+                    <option selected>Select Status</option>
+                    <option value="In need for backup" ' . ($row['emergency_status'] == 'In need for backup' ? 'selected' : '') . '>In need for backup</option>
+                    <option value="Situation Under Control" ' . ($row['emergency_status'] == 'Situation Under Control' ? 'selected' : '') . '>Situation Under Control</option>
+                    <option value="Unsuccessfully Operated" ' . ($row['emergency_status'] == 'Unsuccessfully Operated' ? 'selected' : '') . '>Unsuccessfully Operated</option>
+                    <option value="Successfully Operated" ' . ($row['emergency_status'] == 'Successfully Operated' ? 'selected' : '') . '>Successfully Operated</option>
+                  </select>';
+        }
+        ?>
+        <script>
+        function updateStatus(ID, emergency_status) {
+            $.ajax({
+                type: "POST",
+                url: "../php/update_status.php",
+                data: { id: ID, emergency_status: emergency_status },
+                success: function (response) {
+                    // Log the response to the console for debugging
+                    console.log("Server response:", response);
+
+                    // Assuming the server returns the updated emergency_status
+                    // You may need to adjust this part based on your server response
+                    $("emergency_status").val(response);
+                },
+                error: function (error) {
+                    console.error("Error updating status:", error);
+                }
+            });
+        }
+        </script>
+
+      </div>
+  <?php
   
     $sql = "SELECT address FROM scerns_reports WHERE id = '$id'";
     $result = mysqli_query($conn, $sql);
@@ -102,7 +144,7 @@ if(isset($_GET['type'])) {
 
             // Output the map with a marker
       ?>
-      <div id="map" style="height: 300px; width: 50%;"></div>
+      <div id="map" style="height: 300px; width: 100%;"></div>
       <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
       <script>
         var map = L.map('map').setView([<?php echo $lat; ?>, <?php echo $lon; ?>], 15);
@@ -125,14 +167,6 @@ if(isset($_GET['type'])) {
             echo "Failed to retrieve data from Nominatim.";
         }
       ?>
-
-    
-     
-      <button class="btn btn-secondary rounded-4 border shadow p-2 w-50 fw-semibold mx-2">RESPOND</button>
-      
-    </div>
-
-    <hr style="color: #000; border-width: 3px;">
     <?php
       $sql = "SELECT * FROM scerns_respondents WHERE id = 1";
       $results = mysqli_query($conn, $sql);
@@ -154,13 +188,52 @@ if(isset($_GET['type'])) {
           $src = "data:{$mime_type};base64,{$imageData}";
       }
       ?>
+    <?php
+      if ($respondentNameExistsInScernsStatus) {
+          echo '<div class="text-center my-4">
+                    <input type="hidden" name="id" id="id" value="' . $id . '"/>
+                    <input type="hidden" name="respondent_name" id="respondent_name" value="' . $row['name'] . '"/>
+                    <button class="btn btn-secondary rounded-4 border shadow p-2 w-50 fw-semibold mx-2" onclick="respond()">RESPOND</button>
+                </div>';
+      } 
+      ?>
+
+      <script>
+      function respond() {
+          var id = document.getElementById('id').value;
+          var respondent_name = document.getElementById('respondent_name').value;
+
+          $.ajax({
+              type: "POST",
+              url: "../php/update_respond.php",
+              data: JSON.stringify({ id: id, respondent_name: respondent_name, movement: "Move" }),
+              contentType: 'application/json',
+              success: function(response) {
+                  // Handle the success response if needed
+                  console.log("Data inserted successfully");
+                  
+                  // Reload the page after successful insertion
+                  location.reload();
+              },
+              error: function(error) {
+                  console.error("Error inserting data:", error);
+              }
+          });
+      }
+      </script>
+
+
+
+
+    <hr style="color: #000; border-width: 3px;">
+    
     <div class="card">
       <div class="card-body text-center">
-        <label class="fw-semibold fs-4">Responders Info</label>
+        <label class="fw-semibold fs-4">Responder's Info</label>
         <div class="d-flex align-items-stretch">
           <div class="d-flex flex-row px-3 align-items-center my-2">
             <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;">
-              <img src="<?php echo $src; ?>" class="img-fluid rounded-circle">
+              <img src="<?php echo $src; ?>" style="height: 80px; width: 80px;" class="img-fluid rounded-circle">
             </div>
           </div>
           <div class="text-start my-auto">
@@ -174,7 +247,7 @@ if(isset($_GET['type'])) {
           <ol class="breadcrumb d-flex justify-content-around">
             <li class="breadcrumb-item">
               <div class="d-flex flex-column align-items-center my-2">
-                <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center active" style="height: 60px; width: 60px;">
+                <button id="moveBtn" class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
                   <i class="fa-solid fa-truck-medical fa-xl text-light"></i>
                 </button>
                 <div class="text-center mt-2">Move</div>
@@ -182,7 +255,7 @@ if(isset($_GET['type'])) {
             </li>
             <li class="breadcrumb-item">
               <div class="d-flex flex-column align-items-center my-2">
-                <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;" disabled>
+                <button id="enrouteBtn" class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
                   <i class="fa-solid fa-shuffle fa-xl text-light"></i>
                 </button>
                 <div class="text-center mt-2">Enroute</div>
@@ -190,7 +263,7 @@ if(isset($_GET['type'])) {
             </li>
             <li class="breadcrumb-item">
               <div class="d-flex flex-column align-items-center my-2">
-                <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;" disabled>
+                <button id="arrivedBtn" class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
                   <i class="fa-solid fa-helicopter-symbol fa-xl text-light"></i>
                 </button>
                 <div class="text-center mt-2">Arrived</div>
@@ -199,9 +272,62 @@ if(isset($_GET['type'])) {
           </ol>
         </nav>
 
+        <script>
+        $(document).ready(function() {
+            // Replace 'your_php_variable' with the actual PHP variable that holds the movement value
+            var movement = '<?php echo $movement; ?>';
+
+            // Remove 'active' class from all buttons
+            $('.breadcrumb-item button').removeClass('active');
+
+            // Add 'active' class to the corresponding button
+            if (movement === 'Move') {
+                $('#moveBtn').addClass('active');
+            } else if (movement === 'Enroute') {
+                $('#enrouteBtn').addClass('active');
+            } else if (movement === 'Arrived') {
+                $('#arrivedBtn').addClass('active');
+            }
+        });
+        </script>
+
+<script>
+    $(document).ready(function() {
+        var id = '<?php echo $id; ?>';
+
+        // Function to update movement using Ajax
+        function updateMovement(movement) {
+            $.ajax({
+                type: 'POST',
+                url: '../php/update_movement.php', // Replace with your actual endpoint
+                data: { id: id, movement: movement }, // Include the id in the data
+                success: function(response) {
+                    console.log(response); // Log the server response (you can handle it as needed)
+                },
+                error: function(error) {
+                    console.error('Error updating movement:', error);
+                }
+            });
+        }
+
+        // Event handler for the "Enroute" button
+        $('#enrouteBtn').click(function() {
+            updateMovement('Enroute');
+            location.reload();
+        });
+
+        // Event handler for the "Arrived" button
+        $('#arrivedBtn').click(function() {
+            updateMovement('Arrived');
+            location.reload();
+        });
+    });
+</script>
+
+
       </div>
     </div>
-   
+
 
   </div>
 
