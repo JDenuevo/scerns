@@ -100,7 +100,6 @@ if ($_GET['i'] == "victim") {
   <?php include '../user/components/notif-modal-user.php'; ?>
   <script src="../assets/js/bootstrap.bundle.js"></script>
   <script src="../assets/js/jquery-3.7.1.min.js"></script>
-  <script src="../assets/js/navbarmenu.js"></script>
   <script src="../assets/js/all.min.js"></script>
   <script>
     // Reference: https://nominatim.org/release-docs/develop/api/Search/

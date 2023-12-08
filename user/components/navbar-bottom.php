@@ -23,7 +23,7 @@
 </nav>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
  <!-- TOP NAVBAR -->
- <?php include '../respondent/components/navbar-offcan.php'; ?>
+ <?php include '../user/components/navbar-offcan.php'; ?>
   <script>
     $(document).ready(function() {
       // Function to update notification counts
