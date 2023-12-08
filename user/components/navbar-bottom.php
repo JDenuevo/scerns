@@ -1,8 +1,12 @@
 <nav class="navbar navbar-expand-lg fixed-bottom sidebar-nav" id="mobile-navbar">
   <ul id="sidebarnav" class="nav nav-pills w-100 mx-2">
     <li class="nav-item sidebar-item text-center my-auto">
-      <a class="nav-link sidebar-link text-decoration-none text-secondary" href="./notification.php" aria-expanded="false">
-        <i class="fa-solid fa-bell fa-xl"></i>
+      <a class="nav-link sidebar-link text-decoration-none text-secondary position-relative" href="./notification.php" aria-expanded="false">
+        <i class="fa-solid fa-bell fa-xl">
+          <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger border border-light ms-3">
+            <label>1</label>
+          </span>
+        </i>
       </a>
     </li>
     <li class="nav-item sidebar-item text-center my-auto">
