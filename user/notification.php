@@ -29,7 +29,6 @@ include 'php-header.php';
   <div class="text-center other-cont">
     <!-- TOP NAVBAR -->
     <?php include '../user/components/navbar-top.php'; ?>
-    <h2>VICTIM</h2>
   </div>
 
   <br>

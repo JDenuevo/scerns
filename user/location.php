@@ -195,7 +195,7 @@ include 'php-header.php';
       // Stop checking after a certain period (e.g., 10000 milliseconds or 10 seconds)
       setTimeout(() => {
         clearInterval(checkIntervalId);
-      }, 10000);
+      }, 5000);
   </script>
 
 
