@@ -48,3 +48,38 @@ body{
   cursor: pointer;
 }
 
+/* General styling for the list */
+#suggestions {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 5px; /* Add some margin to separate the list from the input */
+}
+
+/* Styling for list items */
+#suggestions li {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+#suggestions li:hover {
+  background-color: #f2f2f2;
+}
+
+/* Responsive styling for tablet and phone screen sizes */
+@media only screen and (max-width: 768px) {
+  #suggestions li {
+    padding: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #suggestions li {
+    padding: 6px;
+  }
+}
+

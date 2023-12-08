@@ -27,7 +27,7 @@
     height: 80px;
 }
 
-li {
+.nav-item {
     width: 33.333%;
     height: auto;
 }
