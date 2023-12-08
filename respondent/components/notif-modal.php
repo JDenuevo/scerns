@@ -12,7 +12,7 @@
             <div class="col-12">
             <?php
             // Fetch data from the database
-            $sql = "SELECT * FROM scerns_reports WHERE status = 'Ongoing' ORDER BY date DESC";
+            $sql = "SELECT * FROM scerns_reports WHERE status = 'Pending' ORDER BY date DESC";
             $results = mysqli_query($conn, $sql);
 
             // Check if the query execution was successful

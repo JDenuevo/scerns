@@ -67,8 +67,6 @@ if(isset($_GET['type'])) {
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_assoc($result);
       
-      $movement = $row['movement'];
-
       if ($row === null) {
           // No rows found, so the respondent name does not exist in scerns_status
           $respondentNameExistsInScernsStatus = true;
@@ -76,11 +74,8 @@ if(isset($_GET['type'])) {
           $respondentNameExistsInScernsStatus = false;
       }
 
-      if ($row['movement'] == '' || $row['movement'] === null){
-        $showStatus = false;
-      }else{
-        $showStatus = true;
-      }
+      $movement = isset($row['movement']) ? $row['movement'] : null; // Ensure $movement is set even if $row['movement'] is null
+
     ?>
 
     <div class="container">
@@ -90,7 +85,7 @@ if(isset($_GET['type'])) {
         <a href="./home.php"><i class="fa-solid fa-arrow-left fa-2xl text-secondary"></i></a>
         <br><br>
         <?php
-        if ($showStatus) {
+        if ($movement == 'Arrived') {
             echo '<select class="form-select border border-secondary w-50" name="emergency_status" id="emergency_status" onchange="updateStatus(\'' . $row['id'] . '\', this.value)">
                     <option selected>Select Status</option>
                     <option value="In need for backup" ' . ($row['emergency_status'] == 'In need for backup' ? 'selected' : '') . '>In need for backup</option>
@@ -255,7 +250,7 @@ if(isset($_GET['type'])) {
             <ol class="breadcrumb d-flex justify-content-around">
               <li class="breadcrumb-item">
                 <div class="d-flex flex-column align-items-center my-2">
-                  <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center active" style="height: 60px; width: 60px;">
+                  <button id="moveBtn" class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
                     <i class="fa-solid fa-truck-medical fa-xl text-light"></i>
                   </button>
                   <div class="text-center mt-2">Move</div>
@@ -263,7 +258,7 @@ if(isset($_GET['type'])) {
               </li>
               <li class="breadcrumb-item">
                 <div class="d-flex flex-column align-items-center my-2">
-                  <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;" disabled>
+                  <button id="enrouteBtn" class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
                     <i class="fa-solid fa-shuffle fa-xl text-light"></i>
                   </button>
                   <div class="text-center mt-2">Enroute</div>
@@ -271,7 +266,7 @@ if(isset($_GET['type'])) {
               </li>
               <li class="breadcrumb-item">
                 <div class="d-flex flex-column align-items-center my-2">
-                  <button class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;" disabled>
+                  <button id="arrivedBtn" class="btn btn-secondary rounded-circle border border-5 border-secondary d-flex align-items-center justify-content-center" style="height: 60px; width: 60px;">
                     <i class="fa-solid fa-helicopter-symbol fa-xl text-light"></i>
                   </button>
                   <div class="text-center mt-2">Arrived</div>

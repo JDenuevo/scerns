@@ -22,7 +22,7 @@ include 'php-header.php';
   <link rel="stylesheet" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -148,28 +148,58 @@ include 'php-header.php';
 
   <script>
     // Function to update the label text with dots
-    function updateLabel() {
-      const label = document.getElementById('loadingLabel');
-      const currentText = label.innerText;
-      const dots = currentText.match(/\./g);
-      const numberOfDots = dots ? dots.length : 0;
+      function updateLabel() {
+        const label = document.getElementById('loadingLabel');
+        const currentText = label.innerText;
+        const dots = currentText.match(/\./g);
+        const numberOfDots = dots ? dots.length : 0;
 
-      // Limit the number of dots to 3
-      const newDots = numberOfDots < 3 ? '.'.repeat(numberOfDots + 1) : '.';
+        // Limit the number of dots to 3
+        const newDots = numberOfDots < 3 ? '.'.repeat(numberOfDots + 1) : '.';
 
-      label.innerText = `WAITING FOR RESPONSE${newDots}`;
-    }
+        label.innerText = `WAITING FOR RESPONSE${newDots}`;
+      }
 
-    // Call the updateLabel function every 500 milliseconds
-    const intervalId = setInterval(updateLabel, 500);
+      // Call the updateLabel function every 500 milliseconds
+      const intervalId = setInterval(updateLabel, 500);
 
-    // Simulate a response after 3000 milliseconds (3 seconds)
-    setTimeout(() => {
-      // Stop the loading animation and update the label text
-      clearInterval(intervalId);
-      document.getElementById('loadingLabel').innerText = 'RESPONSE RECEIVED!';
-    }, 3000);
+      // Check if $_SESSION["unique_id"] is in scerns_status using AJAX
+      function checkAndUpdateLabel() {
+        const uniqueId = '<?php echo $_SESSION["unique_id"]; ?>';
+
+        // Create a new XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request for the check script
+        xhr.open('GET', '../php/check_status.php?unique_id=' + uniqueId, true);
+
+        // Send the request
+        xhr.send();
+
+        // This will be called after the response is received
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            const response = xhr.responseText;
+            if (response === 'found') {
+              // Stop the loading animation and update the label text
+              clearInterval(intervalId);
+              document.getElementById('loadingLabel').innerText = 'RESPONSE RECEIVED!';
+            }
+          }
+        };
+      }
+
+      // Check and update the label every 500 milliseconds
+      const checkIntervalId = setInterval(checkAndUpdateLabel, 500);
+
+      // Stop checking after a certain period (e.g., 10000 milliseconds or 10 seconds)
+      setTimeout(() => {
+        clearInterval(checkIntervalId);
+      }, 10000);
   </script>
+
+
+
 
 </body>
 </html>

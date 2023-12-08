@@ -15,15 +15,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            // Return the updated status
+            // Status updated in scerns_status
             echo $emergency_status;
+
+            // Check if additional update is needed
+            if ($emergency_status === 'Unsuccessfully Operated' || $emergency_status === 'Successfully Operated') {
+                $updateQuery1 = "UPDATE scerns_reports SET status = 'Done' WHERE id = ?";
+                $stmt1 = $conn->prepare($updateQuery1);
+
+                if ($stmt1) {
+                    $stmt1->bind_param('s', $id);
+                    $stmt1->execute();
+
+                    if ($stmt1->affected_rows > 0) {
+                        // Additional update done
+                        echo "Done";
+                    } else {
+                        echo "No rows were updated in scerns_reports.";
+                    }
+
+                    $stmt1->close();
+                } else {
+                    echo "Error in scerns_reports update: " . $conn->error;
+                }
+            }
         } else {
-            echo "No rows were updated.";
+            echo "No rows were updated in scerns_status.";
         }
 
         $stmt->close();
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error in scerns_status update: " . $conn->error;
     }
 } else {
     echo "Invalid request method.";
